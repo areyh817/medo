@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textColor="#076106"
+        android:layout_marginTop="227dp"
+        android:layout_marginLeft="95dp"
+        android:text="美:도"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작은 도전으로 하루를 바꾼다"
+        android:textColor="#707070"
+        android:textSize="15dp"
+        android:fontFamily="@font/nanuml"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="95dp"/>
+    
+    
+    <Button
+        android:layout_width="186dp"
+        android:layout_height="50dp"
+        android:background="@drawable/main_join_round"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="95dp"
+        android:textSize="15dp"
+        android:textColor="#076106"
+        android:text="회원가입"
+        style="?android:attr/borderlessButtonStyle"/>
+
+</LinearLayout>
