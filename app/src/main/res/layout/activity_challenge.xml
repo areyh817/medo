@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D8EADB"
+    tools:context=".ChallengeActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="#fff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도전 성공 순위"
+            android:textSize="17dp"
+            android:textColor="#076106"
+            android:fontFamily="@font/nanumr"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="29dp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="슬기로운\n미림인"
+            android:textColor="#076106"
+            android:fontFamily="@font/nanumr"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginTop="95dp"
+            android:layout_marginLeft="51dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09월 12일 수 PM 9:02"
+            android:textColor="#076106"
+            android:fontFamily="@font/nanumr"
+            android:id="@+id/date"
+            android:textSize="15dp"
+            android:layout_marginTop="171dp"
+            android:layout_marginLeft="51dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="매일 자정 도전횟수,순위가 초기화 됩니다"
+            android:textColor="#076106"
+            android:fontFamily="@font/nanumr"
+            android:textSize="12dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="51dp"/>
+    </FrameLayout>
+</LinearLayout>

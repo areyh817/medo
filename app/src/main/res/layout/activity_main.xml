@@ -28,6 +28,7 @@
     
     
     <Button
+        android:id="@+id/btnJoin"
         android:layout_width="186dp"
         android:layout_height="50dp"
         android:background="@drawable/main_join_round"

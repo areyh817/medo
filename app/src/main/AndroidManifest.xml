@@ -11,7 +11,13 @@
         android:theme="@style/Theme.Medo">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"/>
+        <activity
+            android:name=".ChallengeActivity"
+            android:exported="true" />
+            <activity
+                android:name=".SplashActivity"
+                android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
