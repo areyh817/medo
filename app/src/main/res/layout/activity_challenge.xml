@@ -35,7 +35,7 @@
             android:fontFamily="@font/nanumr"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="80dp"
             android:layout_marginLeft="51dp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:fontFamily="@font/nanumr"
             android:id="@+id/date"
             android:textSize="15dp"
-            android:layout_marginTop="171dp"
+            android:layout_marginTop="151dp"
             android:layout_marginLeft="51dp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:textColor="#076106"
             android:fontFamily="@font/nanumr"
             android:textSize="12dp"
-            android:layout_marginTop="190dp"
+            android:layout_marginTop="170dp"
             android:layout_marginLeft="51dp"/>
     </FrameLayout>
 
@@ -70,9 +70,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="순위"
-            android:textSize="12dp"
+            android:textSize="13dp"
             android:fontFamily="@font/nanumr"
-            android:textColor="#707070"/>
+            android:textColor="#707070"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="30dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textSize="13dp"
+            android:fontFamily="@font/nanumr"
+            android:textColor="#707070"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="181dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기록"
+            android:textSize="13dp"
+            android:fontFamily="@font/nanumr"
+            android:textColor="#707070"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="340dp"/>
     </FrameLayout>
 </LinearLayout>
