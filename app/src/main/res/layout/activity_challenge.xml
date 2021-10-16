@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#D8EADB"
+    android:orientation="vertical"
     tools:context=".ChallengeActivity">
 
 
@@ -13,87 +13,93 @@
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:background="#fff">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="도전 성공 순위"
-            android:textSize="17dp"
-            android:textColor="#076106"
-            android:fontFamily="@font/nanumr"
+            android:layout_marginLeft="29dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="29dp"/>
+            android:fontFamily="@font/nanumr"
+            android:text="도전 성공 순위"
+            android:textColor="#076106"
+            android:textSize="17dp" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/nanumr"
             android:text="슬기로운\n미림인"
             android:textColor="#076106"
-            android:fontFamily="@font/nanumr"
             android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="51dp"/>
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="151dp"
+            android:fontFamily="@font/nanumr"
             android:text="09월 12일 수 PM 9:02"
             android:textColor="#076106"
-            android:fontFamily="@font/nanumr"
-            android:id="@+id/date"
-            android:textSize="15dp"
-            android:layout_marginTop="151dp"
-            android:layout_marginLeft="51dp"/>
+            android:textSize="15dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="170dp"
+            android:fontFamily="@font/nanumr"
             android:text="매일 자정 도전횟수,순위가 초기화 됩니다"
             android:textColor="#076106"
-            android:fontFamily="@font/nanumr"
-            android:textSize="12dp"
-            android:layout_marginTop="170dp"
-            android:layout_marginLeft="51dp"/>
+            android:textSize="12dp" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:background="@drawable/challenge_round"
-            android:layout_marginTop="69dp"/>
+            android:layout_marginTop="69dp"
+            android:background="@drawable/challenge_round" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="105dp"
+            android:fontFamily="@font/nanumr"
             android:text="순위"
-            android:textSize="13dp"
-            android:fontFamily="@font/nanumr"
             android:textColor="#707070"
-            android:layout_marginTop="105dp"
-            android:layout_marginLeft="30dp"/>
+            android:textSize="13dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="181dp"
+            android:layout_marginTop="105dp"
+            android:fontFamily="@font/nanumr"
             android:text="이름"
-            android:textSize="13dp"
-            android:fontFamily="@font/nanumr"
             android:textColor="#707070"
-            android:layout_marginTop="105dp"
-            android:layout_marginLeft="181dp"/>
+            android:textSize="13dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="기록"
-            android:textSize="13dp"
-            android:fontFamily="@font/nanumr"
-            android:textColor="#707070"
+            android:layout_marginLeft="340dp"
             android:layout_marginTop="105dp"
-            android:layout_marginLeft="340dp"/>
+            android:fontFamily="@font/nanumr"
+            android:text="기록"
+            android:textColor="#707070"
+            android:textSize="13dp" />
     </FrameLayout>
 </LinearLayout>
