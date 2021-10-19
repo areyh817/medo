@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MyProfile extends AppCompatActivity {
+public class MyProfileActivity extends AppCompatActivity {
 
     Button btnJoin;
 
