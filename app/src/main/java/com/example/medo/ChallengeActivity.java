@@ -1,9 +1,9 @@
 package com.example.medo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ChallengeActivity extends AppCompatActivity {
 
@@ -13,5 +13,7 @@ public class ChallengeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_challenge);
+
+
     }
 }

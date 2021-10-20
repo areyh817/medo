@@ -13,9 +13,6 @@
             android:name=".MainActivity"
             android:exported="true"/>
         <activity
-            android:name=".ChallengeActivity"
-            android:exported="true" />
-            <activity
                 android:name=".SplashActivity"
                 android:exported="true" >
             <intent-filter>
@@ -25,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".ChallengeActivityChallengeActivity"></activity>
+        <activity android:name=".ChallengeActivity"></activity>
     </application>
 
 </manifest>
