@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // 로그인을 클릭시 로그인화면으로 전환
-        joinLogin.setOnClickListener(new View.OnClickListener() {
+        joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
