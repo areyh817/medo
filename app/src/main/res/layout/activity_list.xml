@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#D8EADB"
     android:orientation="vertical"
-    tools:context=".ChallengeActivity">
+    tools:context=".ListActivity">
 
 
     <FrameLayout
@@ -29,7 +29,7 @@
         android:background="#F1F1F1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/challengeList"></ListView>
+        android:id="@+id/list"></ListView>
 
 
 

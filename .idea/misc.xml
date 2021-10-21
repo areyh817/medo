@@ -4,11 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_challenge.xml" value="0.20652173913043478" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_fragment1.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_fragment2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_fragment3.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_list.xml" value="0.264" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_login.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_main.xml" value="0.1296875" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_menutab.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_myprofile.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_splash.xml" value="0.20652173913043478" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challenge.xml" value="0.2390625" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_myprofile.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/menu/bottom_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/menu/menu_bottom.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82108/StudioProjects/medo/app/src/main/res/layout/activity_challenge.xml" value="0.264" />
         <entry key="..\:/Users/82108/StudioProjects/medo/app/src/main/res/layout/activity_main.xml" value="0.1526268115942029" />
         <entry key="..\:/Users/82108/StudioProjects/medo/app/src/main/res/layout/activity_myprofile.xml" value="0.22010869565217392" />

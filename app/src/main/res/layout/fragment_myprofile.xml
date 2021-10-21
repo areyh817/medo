@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#D8EADB"
     android:orientation="vertical"
-    tools:context=".ChallengeActivity">
+    tools:context=".Myprofile">
 
 
     <FrameLayout
@@ -20,7 +20,7 @@
             android:layout_marginLeft="29dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/nanumr"
-            android:text="나의 도전"
+            android:text="나의 프로필"
             android:textColor="#076106"
             android:textSize="17dp" />
     </FrameLayout>

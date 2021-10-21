@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#D8EADB"
     android:orientation="vertical"
-    tools:context=".ChallengeActivity">
+    tools:context=".Challenge">
 
 
     <FrameLayout
