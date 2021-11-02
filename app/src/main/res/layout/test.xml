@@ -14,16 +14,13 @@
         android:layout_marginLeft="29dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nanumr"
-        android:text="도전 목록"
+        android:text="나의 프로필"
         android:textColor="#076106"
         android:textSize="17dp" />
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
 
     <androidx.recyclerview.widget.RecyclerView
 
+        android:id="@+id/list"
         android:name="com.example.medo.ItemFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,16 +29,4 @@
         app:layoutManager="LinearLayoutManager"
         tools:context=".ItemFragment"
         tools:listitem="@layout/fragment_item"></androidx.recyclerview.widget.RecyclerView>
-
-
-    <!--//다이어로그 추가-->
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="left"
-        android:layout_marginTop="400dp"
-        android:text="추가" />
-
-
-</FrameLayout>
 </LinearLayout>
