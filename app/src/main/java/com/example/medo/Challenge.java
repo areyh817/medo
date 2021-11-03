@@ -24,14 +24,10 @@ import java.util.List;
 
 public class Challenge extends Fragment {
 
-    private static String[] title = new String[] {"홍길동", "이순신", "강감찬", "유관순", "김유신","을지문덕", "김춘추"};
-    Button start_btn;
+ ListView list;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_challenge_list , container, false);
-        Menu activity = (Menu) getActivity();
-        start_btn = rootView.findViewById(R.id.start_btn);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1); //어댑터를 리스트 뷰에 적용 setListAdapter(adapter);
-        //setListAdapter(adapter);
+        View rootView = inflater.inflate(R.layout.fragment_item_list , container, false);
+
 
 
         return rootView;
