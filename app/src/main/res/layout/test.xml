@@ -28,5 +28,5 @@
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ItemFragment"
-        tools:listitem="@layout/fragment_item"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/fragment_challengeitem"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

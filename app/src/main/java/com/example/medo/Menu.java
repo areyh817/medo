@@ -10,7 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Menu extends AppCompatActivity {
     Ranking ranking;
     Myprofile myprofile;
-    ItemFragment itemFragment;
+    Challenge challenge;
 
 
     @Override
@@ -20,7 +20,7 @@ public class Menu extends AppCompatActivity {
 
         ranking = new Ranking();
         myprofile = new Myprofile();
-        itemFragment=new ItemFragment();
+        challenge=new Challenge();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ranking).commit(); //처음화면
         BottomNavigationView bottom_menu = findViewById(R.id.bottom_menu);
@@ -32,7 +32,7 @@ public class Menu extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, ranking).commit();
                         return true;
                     case R.id.second_tab:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, itemFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, challenge).commit();
                         return true;
                     case R.id.third_tab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, myprofile).commit();
