@@ -1,7 +1,6 @@
 # medo
 美:도 미림인들을 위한 챌린지 도전 앱 :fire:
 
-학업 때문에 미림 학생들이 비타민 섭취, 끼를 놓치는 경우가 많아 이를 해결하기 위해 미림인들의 온라인 콘솔 쇼핑몰 마미(마켓미림)을 기획하게 되었습니다.<br><br>
 :notebook_with_decorative_cover: notion : https://geode-gem-7b6.notion.site/4ea448c706064b4793e8d342beeb2690
 <br><br>
 ### 기획 의도
