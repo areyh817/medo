@@ -71,7 +71,7 @@
             android:textSize="12.5dp"
             android:fontFamily="@font/nanumr"
             android:paddingLeft="10dp"
-            android:id="@+id/joinId"/>
+            android:id="@+id/edtID"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:textSize="12.5dp"
             android:paddingLeft="10dp"
             android:fontFamily="@font/nanumr"
-            android:id="@+id/joinName"/>
+            android:id="@+id/edtName"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             android:layout_marginLeft="45dp"/>
 
         <EditText
-            android:id="@+id/joinPw"
+            android:id="@+id/edtPW"
             android:layout_width="320dp"
             android:layout_height="54dp"
             android:layout_gravity="center_horizontal"
@@ -122,7 +122,7 @@
             android:text="Get Started !"
             android:textColor="#fff"
             android:fontFamily="@font/nanumr"
-            android:id="@+id/joinBtn"
+            android:id="@+id/btnReg"
             style="?android:attr/borderlessButtonStyle"/>
         <TextView
             android:layout_width="wrap_content"
