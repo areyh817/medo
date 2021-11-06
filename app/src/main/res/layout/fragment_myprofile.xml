@@ -50,14 +50,14 @@
 
     <TextView
         android:fontFamily="@font/nanumr"
-        android:id="@+id/username"
+        android:id="@+id/txtUser"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="25dp"
-        android:text="조해정님"/>
+        android:text="미도님"/>
 
 
     <FrameLayout
