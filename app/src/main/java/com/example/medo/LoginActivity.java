@@ -8,14 +8,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class LoginActivity extends AppCompatActivity {
 
-    EditText loginId, loginPw;
+    EditText edtId, edtPw;
     Button loginBtn;
     TextView loginJoin;
+
+    FirebaseDatabase db;        // 파이어베이스 객체
+    DatabaseReference refUser;  // 데이터베이스 레퍼런스
+
+    String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,10 +36,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // findViewById
-        loginId = findViewById(R.id.loginId);
-        loginPw = findViewById(R.id.loginPw);
+        edtId = findViewById(R.id.edtID);
+        edtPw = findViewById(R.id.edtPW);
         loginBtn = findViewById(R.id.loginBtn);
         loginJoin = findViewById(R.id.loginJoin);
+
+        db = FirebaseDatabase.getInstance();        // 읽고쓰기 데이터베이스 객체가져오기
+        refUser = db.getReference("user");      // user에 데이터를 읽고 쓰기 위한 레퍼런스 객체
 
 
         // 회원가입 클릭시 회원가입 화면으로 전환
@@ -40,27 +55,31 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        // 로그인버튼 클릭시 로그인이 되면서 메인화면으로 이동 (로그인 정보 확인할 때 SQLite or FireBase 사용)
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                refUser.addValueEventListener(new ValueEventListener() {    // 데이터를 검색하기 위한 리스너
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.child(edtId.getText().toString()).exists()){
+                            User u = snapshot.child(edtId.getText().toString()).getValue(User.class);
 
-                // 사용자로부터 입력받은 아이디, 비밀번호 값 저장
-                String uid = loginId.getText().toString();
-                String upw = loginPw.getText().toString();
+                            if(u.getPw().equals(edtPw.getText().toString())){
+                                Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), Ranking.class);
+                                i.putExtra("id", edtId.getText().toString());
+                                startActivity(i);
+                                edtId.setText("");
+                                edtPw.setText("");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "패스워드가 다릅니다.", Toast.LENGTH_SHORT).show();;
+                            }
+                        }
+                    }
 
-                // 임시 아이디, 비밀번호를 통해 로그인이 되는지 확인
-                if(uid.equals("mirim") && upw.equals("1111")){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    loginId.setText("");
-                    loginPw.setText("");
-                } else {
-                    Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-                    loginId.setText("");
-                    loginPw.setText("");
-                }
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
             }
         });
 
