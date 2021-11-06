@@ -45,16 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         refUser = db.getReference("user");      // user에 데이터를 읽고 쓰기 위한 레퍼런스 객체
 
 
-        // 회원가입 클릭시 회원가입 화면으로 전환
-        loginJoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(u.getPw().equals(edtPw.getText().toString())){
                                 Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), Ranking.class);
+                                Intent i = new Intent(getApplicationContext(), Menu.class);
                                 i.putExtra("id", edtId.getText().toString());
                                 startActivity(i);
                                 edtId.setText("");
@@ -83,5 +73,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        // 회원가입 클릭시 회원가입 화면으로 전환
+        loginJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            id = data.getStringExtra("id");
+            edtId.setText(id);
+        }
     }
 }
