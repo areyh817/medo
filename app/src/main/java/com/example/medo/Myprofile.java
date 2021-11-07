@@ -30,12 +30,6 @@ public class Myprofile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myprofile , container, false);
 
-        View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
-        userId = view.findViewById(R.id.txtUser);
-
-        String id = User.getId();
-        userId.setText(id);
-        Log.d("MyApp", id);
         return rootView;
 
     }

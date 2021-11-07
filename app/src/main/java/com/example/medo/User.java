@@ -2,9 +2,9 @@ package com.example.medo;
 
 public class User {
 
-    static String id;
-    static String pw;
-    static String name;
+    String id;
+    String pw;
+    String name;
 
 
     User(){ }
@@ -17,25 +17,25 @@ public class User {
     }
 
 
-    public static String getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id) { id = id; }
+    public void setId(String id) { this.id = id; }
 
-    public static String getPw() {
+    public String getPw() {
         return pw;
     }
 
     public void setPw(String pw) {
-        pw = pw;
+        this.pw = pw;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 }
