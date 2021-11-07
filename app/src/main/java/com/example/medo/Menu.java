@@ -2,21 +2,34 @@ package com.example.medo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Menu extends AppCompatActivity {
     Ranking ranking;
     Myprofile myprofile;
     Challenge challenge;
+    FirebaseDatabase db;
+    DatabaseReference ref;
+    TextView userId;
 
+    String id;
+    ArrayAdapter arr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+
 
         ranking = new Ranking();
         myprofile = new Myprofile();

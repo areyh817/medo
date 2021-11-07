@@ -7,9 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,15 +25,23 @@ import com.google.firebase.database.ValueEventListener;
 public class Myprofile extends Fragment {
     Menu activity;
     TextView userId;
-    FirebaseDatabase db;
-    DatabaseReference ref;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myprofile , container, false);
 
+        View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        userId = view.findViewById(R.id.txtUser);
+
+        String id = User.getId();
+        userId.setText(id);
+        Log.d("MyApp", id);
         return rootView;
 
     }
+
+
+
 
 
 }
