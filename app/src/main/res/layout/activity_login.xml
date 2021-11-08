@@ -104,13 +104,14 @@
             android:fontFamily="@font/nanumr"
             android:id="@+id/loginBtn"
             style="?android:attr/borderlessButtonStyle"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="계정이 없으신가요 ?  회원가입"
             android:textSize="12dp"
             android:textColor="#818181"
             android:layout_marginTop="560dp"
+            android:background="#00ff0000"
             android:layout_gravity="center_horizontal"
             android:id="@+id/loginJoin"/>
     </FrameLayout>

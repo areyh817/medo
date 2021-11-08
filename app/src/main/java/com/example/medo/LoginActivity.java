@@ -1,34 +1,26 @@
 package com.example.medo;
 
-import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     EditText mEmailText, mPasswordText;
-    Button bt_login;
-    TextView bt_join;
+    Button bt_login, bt_join;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
 
@@ -43,12 +35,20 @@ public class LoginActivity extends BaseActivity {
 
         mEmailText = findViewById(R.id.edtID);
         mPasswordText = findViewById(R.id.edtPW);
-        bt_join = findViewById(R.id.loginJoin);
-        bt_login = findViewById(R.id.loginBtn);
+        bt_join = findViewById(R.id.btnJoin);
+        bt_login = findViewById(R.id.btnLogin);
 
-        bt_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bt_join.setOnClickListener(this);
+        bt_login.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btnJoin :
+                gotoClass(JoinActivity.class);
+                break;
+            case R.id.btnLogin:
                 String strPw = mPasswordText.getText().toString();
                 String strEmail = mEmailText.getText().toString();
                 //아이디와 비밀번호 둘 다 공백이 아닐 경우
@@ -57,7 +57,8 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                gotoClass(LoginActivity.class);
+                                gotoClass(Menu.class);
+                                finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, "아이디와 비밀번호가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
                             }
@@ -66,9 +67,13 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v);
+        }
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -69,7 +69,7 @@ public class JoinActivity extends BaseActivity {
 
                             mDatabaseRef.child("UserData").child(firebaseUser.getUid()).setValue(userData);
                             Toast.makeText(JoinActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                            gotoClass(LoginActivity.class);
+
                         }
                         //실패시
                         else {
@@ -83,7 +83,7 @@ public class JoinActivity extends BaseActivity {
         joinLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoClass(LoginActivity.class);
+
             }
         });
     }
