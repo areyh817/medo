@@ -25,15 +25,21 @@ import com.google.firebase.database.ValueEventListener;
 public class Myprofile extends Fragment {
     Menu activity;
     TextView userId;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myprofile , container, false);
 
+        //파이어베이스를 위한
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
         userId = view.findViewById(R.id.txtUser);
 
-        String id = User.getId();
+        String id = UserData.getName();
         userId.setText(id);
         return rootView;
 

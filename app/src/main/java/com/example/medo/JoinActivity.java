@@ -69,6 +69,8 @@ public class JoinActivity extends BaseActivity {
 
                             mDatabaseRef.child("UserData").child(firebaseUser.getUid()).setValue(userData);
                             Toast.makeText(JoinActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
+                            startActivity(intent);
 
                         }
                         //실패시
@@ -83,7 +85,8 @@ public class JoinActivity extends BaseActivity {
         joinLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

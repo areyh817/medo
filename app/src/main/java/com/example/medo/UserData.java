@@ -1,7 +1,7 @@
 package com.example.medo;
 
 public class UserData {
-    private String name;
+    private static String name;
     private String idToken;
     private String email;
     private String pw;
@@ -25,7 +25,7 @@ public class UserData {
         return idToken;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 

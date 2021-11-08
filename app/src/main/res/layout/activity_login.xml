@@ -102,7 +102,7 @@
             android:text="Sign in"
             android:textColor="#fff"
             android:fontFamily="@font/nanumr"
-            android:id="@+id/loginBtn"
+            android:id="@+id/btnLogin"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
             android:layout_marginTop="560dp"
             android:background="#00ff0000"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/loginJoin"/>
+            android:id="@+id/btnJoin"/>
     </FrameLayout>
 
 
