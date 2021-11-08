@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,86 +14,61 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
-    EditText edtId, edtPw;
-    Button loginBtn;
-    TextView loginJoin;
-
-    FirebaseDatabase db;        // 파이어베이스 객체
-    DatabaseReference refUser;  // 데이터베이스 레퍼런스
-
-    String id;
+    EditText mEmailText, mPasswordText;
+    Button bt_login;
+    TextView bt_join;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
 
+        //파이어베이스를 위한
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
-        // findViewById
-        edtId = findViewById(R.id.edtID);
-        edtPw = findViewById(R.id.edtPW);
-        loginBtn = findViewById(R.id.loginBtn);
-        loginJoin = findViewById(R.id.loginJoin);
+        mEmailText = findViewById(R.id.edtID);
+        mPasswordText = findViewById(R.id.edtPW);
+        bt_join = findViewById(R.id.loginJoin);
+        bt_login = findViewById(R.id.loginBtn);
 
-        db = FirebaseDatabase.getInstance();        // 읽고쓰기 데이터베이스 객체가져오기
-        refUser = db.getReference("user");      // user에 데이터를 읽고 쓰기 위한 레퍼런스 객체
-
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refUser.addValueEventListener(new ValueEventListener() {    // 데이터를 검색하기 위한 리스너
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.child(edtId.getText().toString()).exists()){
-                            User u = snapshot.child(edtId.getText().toString()).getValue(User.class);
-
-                            if(u.getPw().equals(edtPw.getText().toString())){
-                                Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), Menu.class);
-                                i.putExtra("id", edtId.getText().toString());
-                                startActivity(i);
-                                edtId.setText("");
-                                edtPw.setText("");
+                String strPw = mPasswordText.getText().toString();
+                String strEmail = mEmailText.getText().toString();
+                //아이디와 비밀번호 둘 다 공백이 아닐 경우
+                if (strPw.length() != 0 && strEmail.length() !=0) {
+                    mAuth.signInWithEmailAndPassword(strEmail, strPw).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                gotoClass(LoginActivity.class);
                             } else {
-                                Toast.makeText(getApplicationContext(), "패스워드가 다릅니다.", Toast.LENGTH_SHORT).show();;
+                                Toast.makeText(LoginActivity.this, "아이디와 비밀번호가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) { }
-                });
+                    });
+                } else {
+                    Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-
-        // 회원가입 클릭시 회원가입 화면으로 전환
-        loginJoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            id = data.getStringExtra("id");
-            edtId.setText(id);
-        }
-    }
 }
