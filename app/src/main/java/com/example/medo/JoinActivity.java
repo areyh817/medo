@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class JoinActivity extends BaseActivity {
     private static final String TAG = "JoinActivity";
     EditText mEmailText, mPasswordText, mName;
     Button mregisterBtn;
+    TextView joinLogin;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
 
@@ -46,6 +48,7 @@ public class JoinActivity extends BaseActivity {
         mPasswordText = findViewById(R.id.edtPW);
         mName = findViewById(R.id.edtName);
         mregisterBtn = findViewById(R.id.btnReg);
+        joinLogin = findViewById(R.id.joinLogin);
 
         //파이어베이스 user 로 접글
 
@@ -80,6 +83,13 @@ public class JoinActivity extends BaseActivity {
                         }
                     }
                 });
+            }
+        });
+
+        joinLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoClass(LoginActivity.class);
             }
         });
     }

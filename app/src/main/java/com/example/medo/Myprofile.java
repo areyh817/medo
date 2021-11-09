@@ -36,8 +36,32 @@ public class Myprofile extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myprofile, container, false);
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
 
+        //파이어베이스를 위한
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        userId = rootView.findViewById(R.id.txtUser);
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String get_name = dataSnapshot.child("name").getValue(String.class);
+                if(get_name==""||get_name==null){
+                    get_name = "미도";
+                }
+                TextView userId = view.findViewById(R.id.txtUser);
+                userId.setText(get_name + "님");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        //사용자
 
 
         return view;
+
     }
 }
