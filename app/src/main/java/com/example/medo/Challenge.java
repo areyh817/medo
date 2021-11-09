@@ -15,15 +15,19 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class Challenge extends Fragment {
 
-
-
     ArrayList<Actor> actors;
     ListView customListView;
     private static CustomAdapter_challenge customAdapter;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +37,9 @@ public class Challenge extends Fragment {
         TextView roomName, roomdesc;
         View diglogView, toastView;
 
-
+        //파이어베이스를 위한
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
 
         // Inflate the layout for this fragment

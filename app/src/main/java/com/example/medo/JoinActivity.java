@@ -1,18 +1,20 @@
+
 package com.example.medo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,12 +23,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JoinActivity extends BaseActivity {
 
     private static final String TAG = "JoinActivity";
     EditText mEmailText, mPasswordText, mName;
     Button mregisterBtn;
-    TextView joinLogin;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
 
@@ -34,7 +38,6 @@ public class JoinActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
-
         //파이어베이스를 위한
         mAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -43,7 +46,6 @@ public class JoinActivity extends BaseActivity {
         mPasswordText = findViewById(R.id.edtPW);
         mName = findViewById(R.id.edtName);
         mregisterBtn = findViewById(R.id.btnReg);
-        joinLogin = findViewById(R.id.joinLogin);
 
         //파이어베이스 user 로 접글
 
@@ -70,9 +72,7 @@ public class JoinActivity extends BaseActivity {
 
                             mDatabaseRef.child("UserData").child(firebaseUser.getUid()).setValue(userData);
                             Toast.makeText(JoinActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                            startActivity(intent);
-
+                            gotoClass(LoginActivity.class);
                         }
                         //실패시
                         else {
@@ -82,18 +82,9 @@ public class JoinActivity extends BaseActivity {
                 });
             }
         });
-
-        joinLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
-
 }
