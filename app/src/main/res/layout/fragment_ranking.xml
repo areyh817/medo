@@ -59,7 +59,7 @@
             android:fontFamily="@font/nanumr"
             android:text="매일 자정 도전횟수,순위가 초기화 됩니다"
             android:textColor="#076106"
-            android:textSize="12dp" />
+            android:textSize="14dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -80,7 +80,7 @@
             android:fontFamily="@font/nanumr"
             android:text="순위"
             android:textColor="#707070"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
             android:fontFamily="@font/nanumr"
             android:text="이름"
             android:textColor="#707070"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,8 +98,14 @@
             android:layout_marginLeft="340dp"
             android:layout_marginTop="105dp"
             android:fontFamily="@font/nanumr"
-            android:text="기록"
+            android:text="성공"
             android:textColor="#707070"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
+
+        <ListView
+            android:id="@+id/listview_rank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp" />
     </FrameLayout>
 </LinearLayout>

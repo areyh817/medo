@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable-v24/challenge_round.xml" value="0.1" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26979166666666665" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable-v24/main_join_round.xml" value="0.26979166666666665" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable/add_rectangle.xml" value="0.1125" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable/challenge_rectangle.xml" value="0.1" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable/edit_rectangle.xml" value="0.1125" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26979166666666665" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/drawable/login_round_green.xml" value="0.26979166666666665" />
@@ -22,11 +24,15 @@
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_myprofile.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_splash.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challenge.xml" value="0.2390625" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challengeitem.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challengeitem_list.xml" value="0.12335359675785208" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_item.xml" value="0.23802083333333332" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_item_list.xml" value="0.23802083333333332" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_list.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_myprofile.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_profileitem.xml" value="0.1" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_ranking.xml" value="0.4" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_rankingitem.xml" value="0.21739130434782608" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/list.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/menu/bottom_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/menu/menu_bottom.xml" value="0.25364583333333335" />

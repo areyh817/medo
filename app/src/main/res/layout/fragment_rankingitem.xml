@@ -6,39 +6,46 @@
 
 
     <TextView
-        android:layout_marginLeft="35dp"
+        android:id="@+id/txt_rank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nanumr"
+        android:text="1위"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginLeft="170dp"
         android:layout_marginTop="12dp"
         android:fontFamily= "@font/nanumr"
-        android:id="@+id/txt_challege"
-        android:layout_width="400dp"
+        android:id="@+id/txt_name"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="조혜라"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="12dp"
         android:fontFamily= "@font/nanumr"
-        android:id="@+id/txt_challege_count"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_count"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0명 진행중"
-        android:textSize="15dp"
+        android:text="5개"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/start_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="도전"
-        android:layout_marginLeft="350dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
