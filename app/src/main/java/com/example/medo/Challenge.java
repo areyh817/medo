@@ -39,7 +39,7 @@ public class Challenge extends Fragment {
 
         //파이어베이스를 위한
         mAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
 
         // Inflate the layout for this fragment
@@ -61,12 +61,19 @@ public class Challenge extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                               edtName = diglogView.findViewById(R.id.edtName);
+                                edtName = diglogView.findViewById(R.id.edtName);
                                 edtDesc = diglogView.findViewById(R.id.edtDesc);
+
+                                String edt_name = edtName.getText().toString();
+                                String edt_desc = edtDesc.getText().toString();
+
+                                ChallengeData challengedata = new ChallengeData(edt_name, edt_desc);
+                                mDatabaseRef.child("Challenge").push().setValue(challengedata);
+
                                 /*roomName.setText(edtName.getText().toString());
                                 roomdesc.setText(edtDesc.getText().toString());*/
                                     // 아이템 추가.
-                                  actors.add(new Actor(edtName.getText().toString()));
+                                  // actors.add(new Actor(edtName.getText().toString()));
 
                                 Toast.makeText(getContext(),"추가 되었습니다", Toast.LENGTH_SHORT).show();
                             }
