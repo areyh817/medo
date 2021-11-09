@@ -41,7 +41,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/profile_round_gray"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/pig"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

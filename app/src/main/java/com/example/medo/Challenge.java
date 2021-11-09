@@ -72,8 +72,8 @@ public class Challenge extends Fragment {
 
                                 /*roomName.setText(edtName.getText().toString());
                                 roomdesc.setText(edtDesc.getText().toString());*/
-                                    // 아이템 추가.
-                                  // actors.add(new Actor(edtName.getText().toString()));
+                                // 아이템 추가.
+                                // actors.add(new Actor(edtName.getText().toString()));
 
                                 Toast.makeText(getContext(),"추가 되었습니다", Toast.LENGTH_SHORT).show();
                             }
