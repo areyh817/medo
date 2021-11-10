@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,6 +31,8 @@ public class Challenge extends Fragment {
     private static CustomAdapter_challenge customAdapter;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
+    // DB 데이터를 보여줄 ListView
+    private ArrayAdapter<String> dataAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,18 +92,24 @@ public class Challenge extends Fragment {
 
 
         //기본 데이터
-        actors = new ArrayList<>();
+        /*actors = new ArrayList<>();
         actors.add(new Actor("기술블로그 작성"));
         actors.add(new Actor("깃허브 커밋하기"));
         actors.add(new Actor("독서 1시간 "));
         actors.add(new Actor("프로젝트 2시간 진행하기."));
         actors.add(new Actor("6시 기상하기"));
-        actors.add(new Actor("전공 스터디 진행하기"));
+        actors.add(new Actor("전공 스터디 진행하기"));*/
 
 
         customListView = (ListView) rootView.findViewById(R.id.listView_custom);
         customAdapter = new CustomAdapter_challenge(getContext(),actors);
         customListView.setAdapter(customAdapter);
+
+        // ListView에 출력할 데이터 초기화
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
+
+        // ListView에 Adapter 붙여줌
+        customListView.setAdapter(dataAdapter);
 
 
         return rootView;
