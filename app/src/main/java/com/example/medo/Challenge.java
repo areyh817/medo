@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +45,7 @@ public class Challenge extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_challengeitem_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_challenge, container, false);
         start_btn=rootView.findViewById(R.id.start_btn);
         roomName = rootView.findViewById(R.id.roomName);
         roomdesc = rootView.findViewById(R.id.roomdesc);

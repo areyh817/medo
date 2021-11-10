@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,12 +25,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Myprofile extends Fragment {
     Menu activity;
     TextView userId;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
-
+    ArrayList<Profile> profile;
+    ListView listView_profile;
+    private static CustomAdapter_myprofile customAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -61,7 +66,29 @@ public class Myprofile extends Fragment {
         //사용자
 
 
+        //리스트뷰
+        profile = new ArrayList<>();
+        profile.add(new Profile("깃허브커밋하기"));
+
+
+
+        listView_profile = (ListView) rootView.findViewById(R.id.listView_profile);
+        customAdapter = new CustomAdapter_myprofile(getContext(),profile);
+        listView_profile.setAdapter(customAdapter);
         return view;
 
     }
+}
+
+//data class
+class Profile {
+    private String name;
+    public Profile(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+
+
 }
