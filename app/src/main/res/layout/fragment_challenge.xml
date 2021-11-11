@@ -17,7 +17,7 @@
             android:fontFamily="@font/nanumr"
             android:text="챌린지 목록"
             android:textColor="#076106"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <ListView

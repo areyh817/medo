@@ -11,7 +11,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="55dp"
         android:background="#fff">
 
         <TextView
@@ -23,23 +23,23 @@
             android:fontFamily="@font/nanumr"
             android:text="나의 프로필"
             android:textColor="#076106"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="20dp"
         android:id="@+id/cardview_member"
         android:layout_gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:elevation="6dp"
         app:cardCornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:id="@+id/profile_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:background="@drawable/profile_round_gray"
             android:src="@drawable/pig"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="25dp"
+        android:textSize="18.5dp"
         android:text="미도님"/>
 
 
@@ -85,21 +85,21 @@
         android:id="@+id/txt_rank"
         android:layout_marginLeft="30dp"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:text="현재순위\n2위"/>
     <TextView
         android:fontFamily="@font/nanumr"
         android:id="@+id/txt_challenging"
         android:layout_gravity = "center_horizontal"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:text="도전진행\n3개"/>
     <TextView
         android:fontFamily="@font/nanumr"
         android:id="@+id/txt_challengok"
         android:layout_marginRight="30dp"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:text="도전성공\n1개"/>
 
 
