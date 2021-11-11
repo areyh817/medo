@@ -50,13 +50,12 @@ public class Challenge extends Fragment {
 
         //파이어베이스를 위한
         mAuth = FirebaseAuth.getInstance();
-
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Challenge");
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
         listView.setAdapter(listViewAdapter);
 
 
-        // 자신이 얻은 Reference에 이벤트를 붙여줌
         // 데이터의 변화가 있을 때 출력해옴
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +79,7 @@ public class Challenge extends Fragment {
         });
 
 
+
         btnClick.setOnClickListener(new View.OnClickListener() {
             EditText edtName, edtDesc;
 
@@ -100,7 +100,7 @@ public class Challenge extends Fragment {
                                 String edt_desc = edtDesc.getText().toString();
 
                                 ChallengeData challengedata = new ChallengeData(edt_name, edt_desc);
-                                mDatabaseRef.child("Challenge").push().setValue(challengedata);
+                                mDatabaseRef.push().setValue(challengedata);
 
                                 /*roomName.setText(edtName.getText().toString());
                                 roomdesc.setText(edtDesc.getText().toString());*/
