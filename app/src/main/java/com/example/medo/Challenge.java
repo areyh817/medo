@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -28,11 +28,11 @@ import java.util.ArrayList;
 public class Challenge extends Fragment {
 
     // DB에 저장시킬 데이터를 입력받는 EditText
-    private EditText editText;
+    private  EditText edtName, edtDesc;
     private ListView listView;
 
     Button btnClick;
-
+    ChallengeData challengeData;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
     private ArrayAdapter<String> arrayAdapter;
@@ -82,11 +82,11 @@ public class Challenge extends Fragment {
 
 
         btnClick.setOnClickListener(new View.OnClickListener() {
-            EditText edtName, edtDesc;
+
 
             @Override
             public void onClick(View view) {
-                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge, null);
+                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 방 개설하기");
                 dlg.setView(diglogView);
@@ -100,8 +100,8 @@ public class Challenge extends Fragment {
                                 String edt_name = edtName.getText().toString();
                                 String edt_desc = edtDesc.getText().toString();
 
-                                ChallengeData challengedata = new ChallengeData(edt_name, edt_desc);
-                                mDatabaseRef.push().setValue(challengedata);
+                                challengeData = new ChallengeData(edt_name, edt_desc);
+                                mDatabaseRef.push().setValue(challengeData);
 
                                 /*roomName.setText(edtName.getText().toString());
                                 roomdesc.setText(edtDesc.getText().toString());*/
@@ -114,6 +114,33 @@ public class Challenge extends Fragment {
                 dlg.setNegativeButton("취소", null);
 
                 dlg.show();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
+                edtName = diglogView.findViewById(R.id.edtName);
+                edtDesc = diglogView.findViewById(R.id.edtDesc);
+
+                //파이어베이스에서 타이틀, 설명 가져오세요!
+                //edtName.setText();
+                //edtDesc.setText();
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("챌린지 도전");
+                dlg.setView(diglogView);
+                dlg.setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getContext(), "챌린지 신청 완료!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dlg.setNegativeButton("취소", null);
+
+                dlg.show();
+
             }
         });
         return rootView;
