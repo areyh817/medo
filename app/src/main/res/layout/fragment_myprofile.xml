@@ -65,6 +65,14 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
+        <ListView
+            android:elevation="20dp"
+            android:background="#F3F3F3"
+            android:layout_marginTop="100dp"
+            android:id="@+id/listView_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
 <GridLayout
     android:background="#fff"
     android:layout_marginTop="25dp"
@@ -93,16 +101,9 @@
         android:gravity="center"
         android:textSize="20dp"
         android:text="도전성공\n1개"/>
+
+
 </GridLayout>
-
-
-        <ListView
-            android:elevation="20dp"
-            android:background="#F3F3F3"
-            android:layout_marginTop="100dp"
-            android:id="@+id/listView_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
 
 
 

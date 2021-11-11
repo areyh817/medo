@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class Challenge extends Fragment {
 
     // DB에 저장시킬 데이터를 입력받는 EditText
     private  EditText edtName, edtDesc;
+    private TextView txtName, txtDesc;
     private ListView listView;
 
     Button btnClick;
@@ -86,7 +88,7 @@ public class Challenge extends Fragment {
 
             @Override
             public void onClick(View view) {
-                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
+                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge, null);
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 방 개설하기");
                 dlg.setView(diglogView);
@@ -117,20 +119,23 @@ public class Challenge extends Fragment {
             }
         });
 
+
+        //도전하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
-                edtName = diglogView.findViewById(R.id.edtName);
-                edtDesc = diglogView.findViewById(R.id.edtDesc);
+                txtName = diglogView.findViewById(R.id.txtName);
+                txtDesc = diglogView.findViewById(R.id.txtDesc);
+                String data = (String) parent.getItemAtPosition(position);
 
-                //파이어베이스에서 타이틀, 설명 가져오세요!
-                //edtName.setText();
-                //edtDesc.setText();
+                //파이어베이스에서  설명 가져오세요!
+                txtName.setText(data);
+                //txtDesc.setText();
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 도전");
                 dlg.setView(diglogView);
-                dlg.setPositiveButton("확인",
+                dlg.setPositiveButton("도전",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

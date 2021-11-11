@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="지금 로그인을 하여 우리 지구를 함께 지켜요 !"
+        android:text="지금 로그인을 하여 챌린지를 함께 즐겨요 !"
         android:textColor="#fff"
         android:textSize="12dp"
         android:fontFamily="@font/nanumr"

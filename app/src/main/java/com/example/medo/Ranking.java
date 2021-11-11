@@ -16,20 +16,31 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Ranking extends Fragment {
-
+    TextView txt_date;
     ArrayList<Rank> ranks;
     ListView listview_rank;
     private static CustomAdapter_ranking customAdapter;
+
+    private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/M/d HH:mm");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-
+        //현재시간 설정
         View rootView = inflater.inflate(R.layout.fragment_ranking, container, false);
+        txt_date = (TextView) rootView.findViewById(R.id.txt_date);
+        Date date = new Date();
+        String time = mFormat.format(date);
+        txt_date.setText(time);
+
 
 
         //기본 데이터
@@ -50,7 +61,8 @@ public class Ranking extends Fragment {
 
 //data class
 class Rank {
-    private String name;
+    private String rank, name;
+    private int cnt;
     public Rank(String name) {
         this.name = name;
     }

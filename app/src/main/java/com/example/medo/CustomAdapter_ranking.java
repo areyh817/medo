@@ -52,28 +52,7 @@ public class CustomAdapter_ranking extends ArrayAdapter implements AdapterView.O
 
 
         final Rank ranks = (Rank) list.get(position);
-        //viewHolder.txt_rank.setText(ranks.getName());
-       // viewHolder.txt_name.setText(ranks.getName());
-        //viewHolder.txt_count.setText(ranks.getName());
-        //viewHolder.tv_summary.setText(actor.getSummary());
-/*        Glide
-                .with(context)
-                .load(actor.getThumb_url())
-                .centerCrop()
-                .apply(new RequestOptions().override(250, 350))
-                .into(viewHolder.iv_thumb);
-        viewHolder.tv_name.setTag(actor.getName());*/
 
-
-//        //아이템 클릭 방법2 - 클릭시 아이템 반전 효과가 안 먹힘
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(context, " " + actor.getName(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        //Return the completed view to render on screen
         return convertView;
     }
 }

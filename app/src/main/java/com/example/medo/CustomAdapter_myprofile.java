@@ -24,7 +24,7 @@ public class CustomAdapter_myprofile extends ArrayAdapter implements AdapterView
     }
 
     class ViewHolder {
-        public TextView txt_challege_list;
+        public TextView txt_challenge_list;
         public Button ing_btn;
 
     }
@@ -45,30 +45,11 @@ public class CustomAdapter_myprofile extends ArrayAdapter implements AdapterView
         }
 
         viewHolder = new ViewHolder();
-        viewHolder.txt_challege_list = (TextView) convertView.findViewById(R.id.txt_challege_list);
+        viewHolder.txt_challenge_list = (TextView) convertView.findViewById(R.id.txt_challenge_list);
         viewHolder.ing_btn = (Button) convertView.findViewById(R.id.ing_btn);
 
         final Profile profile = (Profile) list.get(position);
-        //viewHolder.txt_challege_list.setText(profile.getName());
-        //viewHolder.tv_summary.setText(actor.getSummary());
-/*        Glide
-                .with(context)
-                .load(actor.getThumb_url())
-                .centerCrop()
-                .apply(new RequestOptions().override(250, 350))
-                .into(viewHolder.iv_thumb);
-        viewHolder.tv_name.setTag(actor.getName());*/
 
-
-//        //아이템 클릭 방법2 - 클릭시 아이템 반전 효과가 안 먹힘
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(context, " " + actor.getName(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        //Return the completed view to render on screen
         return convertView;
     }
 }

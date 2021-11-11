@@ -24,13 +24,14 @@
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_myprofile.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/activity_splash.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/dlg_challenge.xml" value="0.264" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/dlg_challenge_add.xml" value="0.19947916666666668" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challenge.xml" value="0.10077519379844961" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challengeitem.xml" value="0.12335359675785208" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_challengeitem_list.xml" value="0.12335359675785208" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_item.xml" value="0.23802083333333332" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_item_list.xml" value="0.23802083333333332" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_list.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_myprofile.xml" value="0.1" />
+        <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_myprofile.xml" value="0.264" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_myprofileitem.xml" value="0.12807881773399016" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_profileitem.xml" value="0.1" />
         <entry key="..\:/Android/StudioProjects/medo/app/src/main/res/layout/fragment_ranking.xml" value="0.4" />

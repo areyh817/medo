@@ -23,10 +23,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
-            <EditText
+            <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtName"
+                android:id="@+id/txtName"
                 android:layout_marginTop="50dp"/>
         </LinearLayout>
 
@@ -49,10 +49,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
-            <EditText
+            <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtDesc"
+                android:id="@+id/txtDesc"
                 android:layout_marginTop="50dp"/>
         </LinearLayout>
 

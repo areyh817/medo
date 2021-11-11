@@ -25,27 +25,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Myprofile extends Fragment {
     Menu activity;
-    TextView userId;
+    TextView userId , txt_date;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
     ArrayList<Profile> profile;
     ListView listView_profile;
+
     private static CustomAdapter_myprofile customAdapter;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myprofile, container, false);
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
+
+
 
         //파이어베이스를 위한
         mAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
-        userId = rootView.findViewById(R.id.txtUser);
+        userId = view.findViewById(R.id.txtUser);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
         mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -66,13 +72,15 @@ public class Myprofile extends Fragment {
         //사용자
 
 
-        //리스트뷰
+        //리스트뷰 값이 안들어간다 여기에 유저가 선택한 도전들 띄우게 해주쇼
         profile = new ArrayList<>();
-        profile.add(new Profile("깃허브커밋하기"));
+        profile.add(new Profile("깃허브 커밋하기"));
+        profile.add(new Profile("깃허브 커밋하기"));
+        profile.add(new Profile("깃허브 커밋하기"));
 
 
 
-        listView_profile = (ListView) rootView.findViewById(R.id.listView_profile);
+        listView_profile = (ListView) view.findViewById(R.id.listView_profile);
         customAdapter = new CustomAdapter_myprofile(getContext(),profile);
         listView_profile.setAdapter(customAdapter);
         return view;
