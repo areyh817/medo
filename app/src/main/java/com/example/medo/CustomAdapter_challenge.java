@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 public class CustomAdapter_challenge extends ArrayAdapter implements AdapterView.OnItemClickListener {
 
     private Context context;
@@ -69,6 +69,6 @@ public class CustomAdapter_challenge extends ArrayAdapter implements AdapterView
 //        });
 
         //Return the completed view to render on screen
-        return convertView;
+        /*return convertView;
     }
-}
+}*/

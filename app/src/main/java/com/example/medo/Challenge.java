@@ -21,41 +21,68 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Challenge extends Fragment {
 
-    ArrayList<Actor> actors;
-    ListView customListView;
-    private static CustomAdapter_challenge customAdapter;
+    // DB에 저장시킬 데이터를 입력받는 EditText
+    private EditText editText;
+    private ListView listView;
+
+    Button btnClick;
+
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
-    // DB 데이터를 보여줄 ListView
-    private ArrayAdapter<String> dataAdapter;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> arr_room = new ArrayList<>();
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        Button btnClick ,start_btn;
-        TextView roomName, roomdesc;
-        View diglogView, toastView;
-
-        //파이어베이스를 위한
-        mAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_challenge, container, false);
-        start_btn=rootView.findViewById(R.id.start_btn);
-        roomName = rootView.findViewById(R.id.roomName);
-        roomdesc = rootView.findViewById(R.id.roomdesc);
+        listView = rootView.findViewById(R.id.listView_custom);
+
         btnClick = rootView.findViewById(R.id.btnClick);
+
+        //파이어베이스를 위한
+        mAuth = FirebaseAuth.getInstance();
+
+
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
+        listView.setAdapter(listViewAdapter);
+
+
+        // 자신이 얻은 Reference에 이벤트를 붙여줌
+        // 데이터의 변화가 있을 때 출력해옴
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // 데이터를 읽어올 때 모든 데이터를 읽어오기때문에 List 를 초기화해주는 작업이 필요하다.
+                listViewAdapter.clear();
+                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                    String msg = messageData.getValue().toString();
+                    listViewAdapter.add(msg);
+                }
+                // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
+                listViewAdapter.notifyDataSetChanged();
+                // ListView 의 위치를 마지막으로 보내주기 위함
+                listView.setSelection(listViewAdapter.getCount() - 1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         btnClick.setOnClickListener(new View.OnClickListener() {
             EditText edtName, edtDesc;
+
             @Override
             public void onClick(View view) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge, null);
@@ -80,7 +107,7 @@ public class Challenge extends Fragment {
                                 // 아이템 추가.
                                 // actors.add(new Actor(edtName.getText().toString()));
 
-                                Toast.makeText(getContext(),"추가 되었습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "추가 되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         });
                 dlg.setNegativeButton("취소", null);
@@ -88,44 +115,6 @@ public class Challenge extends Fragment {
                 dlg.show();
             }
         });
-
-
-
-        //기본 데이터
-        /*actors = new ArrayList<>();
-        actors.add(new Actor("기술블로그 작성"));
-        actors.add(new Actor("깃허브 커밋하기"));
-        actors.add(new Actor("독서 1시간 "));
-        actors.add(new Actor("프로젝트 2시간 진행하기."));
-        actors.add(new Actor("6시 기상하기"));
-        actors.add(new Actor("전공 스터디 진행하기"));*/
-
-
-        customListView = (ListView) rootView.findViewById(R.id.listView_custom);
-        customAdapter = new CustomAdapter_challenge(getContext(),actors);
-        customListView.setAdapter(customAdapter);
-
-        // ListView에 출력할 데이터 초기화
-        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
-
-        // ListView에 Adapter 붙여줌
-        customListView.setAdapter(dataAdapter);
-
-
         return rootView;
     }
-}
-
-
-//data class
-class Actor {
-    private String name;
-    public Actor(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
-
-
 }
