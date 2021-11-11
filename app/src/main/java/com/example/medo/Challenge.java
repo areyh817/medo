@@ -63,8 +63,9 @@ public class Challenge extends Fragment {
                 // 데이터를 읽어올 때 모든 데이터를 읽어오기때문에 List 를 초기화해주는 작업이 필요하다.
                 listViewAdapter.clear();
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                    String msg = messageData.getValue().toString();
-                    listViewAdapter.add(msg);
+                    //String msg = messageData.getValue().toString();
+                    ChallengeData challengedata = messageData.getValue(ChallengeData.class);
+                    listViewAdapter.add(challengedata.getTitle());
                 }
                 // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
                 listViewAdapter.notifyDataSetChanged();
