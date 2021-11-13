@@ -3,6 +3,7 @@ package com.example.medo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,7 @@ public class Challenge extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
                 txtName = diglogView.findViewById(R.id.txtName);
-
+                txtDesc = diglogView.findViewById(R.id.txtDesc);
                 String data = (String) parent.getItemAtPosition(position);
 
                 //파이어베이스에서  설명 가져오세요!
@@ -140,16 +141,15 @@ public class Challenge extends Fragment {
                 mDatabaseRef.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String get_desc = dataSnapshot.child("content").getValue(String.class);
-                        txtDesc = diglogView.findViewById(R.id.txtDesc);
-                        txtDesc.setText(get_desc);
+                        ChallengeData user_model = dataSnapshot.getValue(ChallengeData.class);
+
+                        txtDesc.setText(user_model.getContent());
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-
 
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 도전");

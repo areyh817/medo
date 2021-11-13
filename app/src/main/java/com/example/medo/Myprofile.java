@@ -54,6 +54,7 @@ public class Myprofile extends Fragment {
         userId = view.findViewById(R.id.txtUser);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
+
         mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
