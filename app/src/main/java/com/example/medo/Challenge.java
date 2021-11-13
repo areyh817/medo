@@ -14,9 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -126,12 +128,29 @@ public class Challenge extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
                 txtName = diglogView.findViewById(R.id.txtName);
-                txtDesc = diglogView.findViewById(R.id.txtDesc);
+
                 String data = (String) parent.getItemAtPosition(position);
 
                 //파이어베이스에서  설명 가져오세요!
                 txtName.setText(data);
                 //txtDesc.setText();
+
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                mDatabaseRef.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String get_desc = dataSnapshot.child("content").getValue(String.class);
+                        txtDesc = diglogView.findViewById(R.id.txtDesc);
+                        txtDesc.setText(get_desc);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 도전");
                 dlg.setView(diglogView);
