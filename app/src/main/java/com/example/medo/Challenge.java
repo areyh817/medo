@@ -138,9 +138,7 @@ public class Challenge extends Fragment {
 
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Challenge");
-
-                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabaseRef.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String get_desc = dataSnapshot.child("content").getValue(String.class);
