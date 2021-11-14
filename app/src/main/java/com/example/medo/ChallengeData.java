@@ -3,12 +3,18 @@ package com.example.medo;
 public class ChallengeData {
     String title;
     String content;
+    private String idToken;
 
     ChallengeData(){}
 
-    public ChallengeData(String title, String content) {
+    public ChallengeData(String title, String idToken, String content) {
         this.title = title;
+        this.idToken = idToken;
         this.content = content;
+    }
+
+    public String getIdToken() {
+        return idToken;
     }
 
     public String getTitle() {
@@ -25,5 +31,9 @@ public class ChallengeData {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
     }
 }

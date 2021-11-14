@@ -56,6 +56,7 @@ public class Challenge extends Fragment {
         //파이어베이스를 위한
         mAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Challenge");
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
         listView.setAdapter(listViewAdapter);
@@ -105,7 +106,15 @@ public class Challenge extends Fragment {
                                 String edt_name = edtName.getText().toString();
                                 String edt_desc = edtDesc.getText().toString();
 
-                                challengeData = new ChallengeData(edt_name, edt_desc);
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                ChallengeData challengedata2 = new ChallengeData();
+                                challengedata2.setIdToken(firebaseUser.getUid());
+                                challengedata2.setTitle(edt_name);
+                                challengedata2.setContent(edt_desc);
+
+                                mDatabaseRef.child(firebaseUser.getUid()).setValue(challengedata2);
+
+                                // challengeData = new ChallengeData(edt_name, edt_desc);
                                 mDatabaseRef.push().setValue(challengeData);
 
                                 /*roomName.setText(edtName.getText().toString());
