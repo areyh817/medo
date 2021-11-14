@@ -138,14 +138,17 @@ public class Challenge extends Fragment {
 
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                mDatabaseRef.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Challenge");
+
+                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ChallengeData user_model = dataSnapshot.getValue(ChallengeData.class);
-
-                        txtDesc.setText(user_model.getContent());
+                        String get_desc = dataSnapshot.child("content").getValue(String.class);
+                        if(get_desc==""||get_desc==null){
+                            get_desc = "이게 나오면 비정상임";
+                        }
+                        txtDesc.setText(get_desc);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
