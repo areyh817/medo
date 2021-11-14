@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,8 +39,10 @@ public class Myprofile extends Fragment {
     private DatabaseReference mDatabaseRef;
     ArrayList<Profile> profile;
     ListView listView_profile;
+    Button logout;
 
     private static CustomAdapter_myprofile customAdapter;
+
 
 
 
@@ -45,6 +50,17 @@ public class Myprofile extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
 
+        //로그아웃기능
+        logout = view.findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //파이어베이스를 위한
@@ -88,6 +104,8 @@ public class Myprofile extends Fragment {
 
     }
 }
+
+
 
 //data class
 class Profile {

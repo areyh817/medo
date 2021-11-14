@@ -24,6 +24,16 @@
             android:text="나의 프로필"
             android:textColor="#076106"
             android:textSize="15dp" />
+        <Button
+            android:fontFamily="@font/nanumr"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="로그아웃"
+            android:textSize="12dp"
+            android:textColor="#818181"
+            android:background="#00ff0000"
+          android:layout_marginLeft="350dp"
+            android:id="@+id/logout"/>
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
@@ -66,14 +76,14 @@
         android:background="#fff">
 
         <ListView
-            android:elevation="20dp"
-            android:background="#F3F3F3"
-            android:layout_marginTop="100dp"
             android:id="@+id/listView_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="#F3F3F3"
+            android:elevation="20dp"></ListView>
 
-<GridLayout
+        <GridLayout
     android:background="#fff"
     android:layout_marginTop="25dp"
     android:layout_width="match_parent"

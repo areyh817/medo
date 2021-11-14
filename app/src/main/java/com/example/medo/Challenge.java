@@ -141,9 +141,9 @@ public class Challenge extends Fragment {
                 txtDesc = diglogView.findViewById(R.id.txtDesc);
                 String data = (String) parent.getItemAtPosition(position);
 
-                //파이어베이스에서  설명 가져오세요!
+
                 txtName.setText(data);
-                //txtDesc.setText();
+
 
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
@@ -171,7 +171,13 @@ public class Challenge extends Fragment {
                                 Toast.makeText(getContext(), "챌린지 신청 완료!", Toast.LENGTH_SHORT).show();
                             }
                         });
-                dlg.setNegativeButton("취소", null);
+                dlg.setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "취소", Toast.LENGTH_SHORT).show();
+                    }
+                });;
 
                 dlg.show();
 

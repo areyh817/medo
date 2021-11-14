@@ -14,20 +14,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="방 제목"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:id="@+id/roomName"
-            android:textSize="13dp"/>
+            android:textSize="15dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
+                android:layout_marginLeft="30dp"
+                android:textSize="20dp"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtName"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="20dp"/>
         </LinearLayout>
 
     </FrameLayout>
@@ -40,20 +41,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="방 설명"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:id="@+id/roomdesc"
-            android:textSize="13dp"/>
+            android:textSize="15dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
+                android:layout_marginLeft="30dp"
+                android:textSize="20dp"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtDesc"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="20dp"/>
         </LinearLayout>
 
     </FrameLayout>
