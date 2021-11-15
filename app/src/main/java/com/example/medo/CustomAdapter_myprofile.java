@@ -46,7 +46,7 @@ public class CustomAdapter_myprofile extends ArrayAdapter implements AdapterView
 
         viewHolder = new ViewHolder();
         viewHolder.txt_challenge_list = (TextView) convertView.findViewById(R.id.txt_challenge_list);
-        viewHolder.ing_btn = (Button) convertView.findViewById(R.id.ing_btn);
+        // viewHolder.ing_btn = (Button) convertView.findViewById(R.id.ing_btn);
 
         final Profile profile = (Profile) list.get(position);
 

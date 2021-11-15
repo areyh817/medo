@@ -167,7 +167,7 @@ public class Challenge extends Fragment {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         String get_name = dataSnapshot.child("name").getValue(String.class);
                                         if(get_name==""||get_name==null){
-                                            get_name = "조혜라임";
+                                            get_name = "미도[테스트]";
                                         }
                                         user_name = get_name;
 

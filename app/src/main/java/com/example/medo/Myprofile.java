@@ -38,7 +38,8 @@ public class Myprofile extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
     ArrayList<Profile> profile;
-    ListView listView_profile;
+    private ArrayList<String> arr_room = new ArrayList<>();
+    private ListView listView;
     Button logout;
 
     private static CustomAdapter_myprofile customAdapter;
@@ -48,10 +49,15 @@ public class Myprofile extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        // View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        listView = rootView.findViewById(R.id.listView_profile);
+
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
+        listView.setAdapter(listViewAdapter);
 
         //로그아웃기능
-        logout = view.findViewById(R.id.logout);
+        logout = rootView.findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +73,7 @@ public class Myprofile extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
-        userId = view.findViewById(R.id.txtUser);
+        userId = rootView.findViewById(R.id.txtUser);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
 
@@ -78,7 +84,7 @@ public class Myprofile extends Fragment {
                 if(get_name==""||get_name==null){
                     get_name = "미도";
                 }
-                TextView userId = view.findViewById(R.id.txtUser);
+                TextView userId = rootView.findViewById(R.id.txtUser);
                 userId.setText(get_name + "님");
             }
 
@@ -90,17 +96,70 @@ public class Myprofile extends Fragment {
 
 
         //리스트뷰 값이 안들어간다 여기에 유저가 선택한 도전들 띄우게 해주쇼
-        profile = new ArrayList<>();
+        /*profile = new ArrayList<>();
         profile.add(new Profile("깃허브 커밋하기"));
         profile.add(new Profile("깃허브 커밋하기"));
-        profile.add(new Profile("깃허브 커밋하기"));
+        profile.add(new Profile("깃허브 커밋하기"));*/
+
+
+        
+        // 지금 현재 로그인 되어있는 사람의 이름 값을 UserData에서 가져와야함
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        final String[] user_name = new String[1];
+        UserData userdata = new UserData();
+
+        mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String get_name = dataSnapshot.child("name").getValue(String.class);
+                if(get_name==""||get_name==null){
+                    get_name = "미도[테스트]";
+                }
+
+                // userdata.setName(get_name);
+                user_name[0] = get_name;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listViewAdapter.clear();
+                String challengeadd_name = dataSnapshot.child("name").getValue(String.class);
+                for (DataSnapshot messageData : dataSnapshot.getChildren()){
+                    if (user_name[0] == challengeadd_name) {
+
+                        ChallengeData challengedata = messageData.getValue(ChallengeData.class);
+                        listViewAdapter.add(challengedata.getTitle());
+
+                        // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
+                        listViewAdapter.notifyDataSetChanged();
+                        // ListView 의 위치를 마지막으로 보내주기 위함
+                        listView.setSelection(listViewAdapter.getCount() - 1);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 
-        listView_profile = (ListView) view.findViewById(R.id.listView_profile);
+       /* listView_profile = (ListView) view.findViewById(R.id.listView_profile);
         customAdapter = new CustomAdapter_myprofile(getContext(),profile);
-        listView_profile.setAdapter(customAdapter);
-        return view;
+        listView_profile.setAdapter(customAdapter);*/
+        return rootView;
 
     }
 }
