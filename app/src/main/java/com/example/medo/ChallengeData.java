@@ -7,9 +7,8 @@ public class ChallengeData {
 
     ChallengeData(){}
 
-    public ChallengeData(String title, String idToken, String content) {
+    public ChallengeData(String title, String content) {
         this.title = title;
-        this.idToken = idToken;
         this.content = content;
     }
 

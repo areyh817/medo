@@ -85,8 +85,6 @@ public class Challenge extends Fragment {
             }
         });
 
-
-
         btnClick.setOnClickListener(new View.OnClickListener() {
 
 
@@ -106,23 +104,10 @@ public class Challenge extends Fragment {
                                 String edt_name = edtName.getText().toString();
                                 String edt_desc = edtDesc.getText().toString();
 
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                ChallengeData challengedata2 = new ChallengeData();
-                                challengedata2.setIdToken(firebaseUser.getUid());
-                                challengedata2.setTitle(edt_name);
-                                challengedata2.setContent(edt_desc);
+                                ChallengeData challengedata = new ChallengeData(edt_name, edt_desc);
+                                mDatabaseRef.push().setValue(challengedata);
 
-                                mDatabaseRef.child(firebaseUser.getUid()).setValue(challengedata2);
-
-                                // challengeData = new ChallengeData(edt_name, edt_desc);
-                                mDatabaseRef.push().setValue(challengeData);
-
-                                /*roomName.setText(edtName.getText().toString());
-                                roomdesc.setText(edtDesc.getText().toString());*/
-                                // 아이템 추가.
-                                // actors.add(new Actor(edtName.getText().toString()));
-
-                                Toast.makeText(getContext(), "추가 되었습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"추가 되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         });
                 dlg.setNegativeButton("취소", null);
@@ -133,7 +118,7 @@ public class Challenge extends Fragment {
 
 
         //도전하기
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
@@ -182,7 +167,7 @@ public class Challenge extends Fragment {
                 dlg.show();
 
             }
-        });
+        });*/
         return rootView;
     }
 }
