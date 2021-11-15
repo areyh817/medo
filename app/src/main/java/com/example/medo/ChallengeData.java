@@ -7,9 +7,10 @@ public class ChallengeData {
 
     ChallengeData(){}
 
-    public ChallengeData(String title, String content) {
+    public ChallengeData(String title, String content, String idToken) {
         this.title = title;
         this.content = content;
+        this.idToken = idToken;
     }
 
     public String getIdToken() {

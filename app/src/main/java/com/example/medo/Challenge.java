@@ -101,10 +101,12 @@ public class Challenge extends Fragment {
                                 edtName = diglogView.findViewById(R.id.edtName);
                                 edtDesc = diglogView.findViewById(R.id.edtDesc);
 
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
                                 String edt_name = edtName.getText().toString();
                                 String edt_desc = edtDesc.getText().toString();
 
-                                ChallengeData challengedata = new ChallengeData(edt_name, edt_desc);
+                                ChallengeData challengedata = new ChallengeData(edt_name, edt_desc, firebaseUser.getUid());
                                 mDatabaseRef.push().setValue(challengedata);
 
                                 Toast.makeText(getContext(),"추가 되었습니다", Toast.LENGTH_SHORT).show();
@@ -118,7 +120,7 @@ public class Challenge extends Fragment {
 
 
         //도전하기
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_add, null);
@@ -126,18 +128,19 @@ public class Challenge extends Fragment {
                 txtDesc = diglogView.findViewById(R.id.txtDesc);
                 String data = (String) parent.getItemAtPosition(position);
 
-
+                //파이어베이스에서  설명 가져오세요!
                 txtName.setText(data);
-
 
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                mDatabaseRef.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                // String user_name;
+
+                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String get_desc = dataSnapshot.child("content").getValue(String.class);
                         if(get_desc==""||get_desc==null){
-                            get_desc = "이게 나오면 비정상임";
+                            get_desc = "미림인 여러분 ! 성실히 챌린지에 임해주시길 바랍니다 !";
                         }
                         txtDesc.setText(get_desc);
                     }
@@ -153,21 +156,39 @@ public class Challenge extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+
+                                mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    String user_name;
+
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String get_name = dataSnapshot.child("name").getValue(String.class);
+                                        if(get_name==""||get_name==null){
+                                            get_name = "조혜라임";
+                                        }
+                                        user_name = get_name;
+
+                                        mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
+                                        ChallengeAdd challengeAdd = new ChallengeAdd(data, user_name);
+                                        mDatabaseRef.push().setValue(challengeAdd);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
+
                                 Toast.makeText(getContext(), "챌린지 신청 완료!", Toast.LENGTH_SHORT).show();
                             }
                         });
-                dlg.setNegativeButton("취소",
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), "취소", Toast.LENGTH_SHORT).show();
-                    }
-                });;
+                dlg.setNegativeButton("취소", null);
 
                 dlg.show();
 
             }
-        });*/
+        });
         return rootView;
     }
 }
