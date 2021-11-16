@@ -119,6 +119,8 @@ public class Myprofile extends Fragment {
 
                 // userdata.setName(get_name);
                 user_name[0] = get_name;
+                // Log를 찍었을 때 값이 잘 들어감.
+                Log.d("user_name", user_name[0]);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -134,8 +136,7 @@ public class Myprofile extends Fragment {
                 listViewAdapter.clear();
                 String challengeadd_name = dataSnapshot.child("name").getValue(String.class);
                 for (DataSnapshot messageData : dataSnapshot.getChildren()){
-                    if (user_name[0] == challengeadd_name) {
-
+                    // if문 조건 다시 줘야함
                         ChallengeData challengedata = messageData.getValue(ChallengeData.class);
                         listViewAdapter.add(challengedata.getTitle());
 
@@ -143,7 +144,6 @@ public class Myprofile extends Fragment {
                         listViewAdapter.notifyDataSetChanged();
                         // ListView 의 위치를 마지막으로 보내주기 위함
                         listView.setSelection(listViewAdapter.getCount() - 1);
-                    }
                 }
 
             }
