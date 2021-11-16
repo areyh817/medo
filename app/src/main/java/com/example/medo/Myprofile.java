@@ -120,7 +120,7 @@ public class Myprofile extends Fragment {
                 // userdata.setName(get_name);
                 user_name[0] = get_name;
                 // Log를 찍었을 때 값이 잘 들어감.
-                Log.d("user_name", user_name[0]);
+                // Log.d("user_name", user_name[0]);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
