@@ -134,6 +134,7 @@ public class Myprofile extends Fragment {
                 listViewAdapter.clear();
                 String challengeadd_name = dataSnapshot.child("name").getValue(String.class);
                 for (DataSnapshot messageData : dataSnapshot.getChildren()){
+                    // if문 조건 다시 줘야함
                     if (user_name[0] == challengeadd_name) {
 
                         ChallengeData challengedata = messageData.getValue(ChallengeData.class);
