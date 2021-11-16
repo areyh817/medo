@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    android:fontFamily="@font/nanumr"
     android:orientation="vertical"
     android:layout_width="match_parent"
     style="@style/Widget.AppCompat.Button.Borderless"
@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp">
         <TextView
+            android:fontFamily="@font/nanumr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="방 제목"
@@ -24,8 +25,9 @@
             android:layout_gravity="center">
             <TextView
                 android:layout_marginLeft="30dp"
-                android:textSize="20dp"
-                android:layout_width="300dp"
+                android:fontFamily="@font/nanumr"
+                android:textSize="18dp"
+                android:layout_width="325dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtName"
                 android:layout_marginTop="20dp"/>
@@ -38,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
         <TextView
+            android:fontFamily="@font/nanumr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="방 설명"
@@ -51,8 +54,9 @@
             android:layout_gravity="center">
             <TextView
                 android:layout_marginLeft="30dp"
-                android:textSize="20dp"
-                android:layout_width="300dp"
+                android:fontFamily="@font/nanumr"
+                android:textSize="18dp"
+                android:layout_width="325dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtDesc"
                 android:layout_marginTop="20dp"/>
