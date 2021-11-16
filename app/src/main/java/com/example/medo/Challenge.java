@@ -36,6 +36,7 @@ public class Challenge extends Fragment {
     private TextView txtName, txtDesc;
     private ListView listView;
 
+
     Button btnClick;
     ChallengeData challengeData;
     private FirebaseAuth mAuth;
@@ -172,8 +173,8 @@ public class Challenge extends Fragment {
                                         user_name = get_name;
 
                                         mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
-                                        ChallengeAdd challengeAdd = new ChallengeAdd(data, user_name);
-                                        mDatabaseRef.push().setValue(challengeAdd);
+                                        ChallengeAdd challengeAdd = new ChallengeAdd(user_name, firebaseUser.getUid(), data);
+                                        mDatabaseRef.child(firebaseUser.getUid()).push().setValue(challengeAdd);
                                     }
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {

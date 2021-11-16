@@ -1,14 +1,31 @@
 package com.example.medo;
 
 public class ChallengeAdd {
-    String title;
     String name;
+    String idToken;
+    String title;
 
-    ChallengeAdd() { }
-
-    public ChallengeAdd(String title, String name) {
-        this.title = title;
+    public ChallengeAdd(String name, String idToken, String title) {
         this.name = name;
+        this.idToken = idToken;
+        this.title = title;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdToken() {
+        return idToken;
+    }
+
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
     }
 
     public String getTitle() {
@@ -18,13 +35,4 @@ public class ChallengeAdd {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
-

@@ -130,11 +130,11 @@ public class Myprofile extends Fragment {
 
         // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 listViewAdapter.clear();
-                String challengeadd_name = dataSnapshot.child("name").getValue(String.class);
+                String challengeadd_name = dataSnapshot.child("title").getValue(String.class);
                 for (DataSnapshot messageData : dataSnapshot.getChildren()){
                     // if문 조건 다시 줘야함
                         ChallengeData challengedata = messageData.getValue(ChallengeData.class);
