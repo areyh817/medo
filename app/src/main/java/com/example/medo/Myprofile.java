@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.medo.placeholder.ProgresCount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,13 +35,14 @@ import java.util.Date;
 
 public class Myprofile extends Fragment {
     Menu activity;
-    TextView userId , txt_date;
+    TextView userId , txt_date, txt_challenging;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
     ArrayList<Profile> profile;
     private ArrayList<String> arr_room = new ArrayList<>();
     private ListView listView;
     Button logout;
+    static int progres_cnt;
 
     private static CustomAdapter_myprofile customAdapter;
 
@@ -144,7 +146,11 @@ public class Myprofile extends Fragment {
                         listViewAdapter.notifyDataSetChanged();
                         // ListView 의 위치를 마지막으로 보내주기 위함
                         listView.setSelection(listViewAdapter.getCount() - 1);
+                        progres_cnt = listViewAdapter.getCount();
                 }
+
+
+                ProgresCount pcnt = new ProgresCount(progres_cnt);
 
             }
 
@@ -159,6 +165,13 @@ public class Myprofile extends Fragment {
        /* listView_profile = (ListView) view.findViewById(R.id.listView_profile);
         customAdapter = new CustomAdapter_myprofile(getContext(),profile);
         listView_profile.setAdapter(customAdapter);*/
+
+        ProgresCount pcnt = new ProgresCount(progres_cnt);
+
+        // 현재순위, 도전진행, 도전성공을 프로필에 띄워주기
+        txt_challenging = rootView.findViewById(R.id.txt_challenging);
+        txt_challenging.setText(pcnt.getCnt()+"개");
+
         return rootView;
 
     }
