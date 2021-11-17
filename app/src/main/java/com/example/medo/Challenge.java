@@ -173,6 +173,7 @@ public class Challenge extends Fragment {
                                         user_name = get_name;
 
                                         mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
+
                                         ChallengeAdd challengeAdd = new ChallengeAdd(user_name, firebaseUser.getUid(), data);
                                         mDatabaseRef.child(firebaseUser.getUid()).push().setValue(challengeAdd);
                                     }

@@ -1,6 +1,9 @@
 package com.example.medo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.Transliterator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.medo.placeholder.ProgresCount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +40,7 @@ import java.util.Date;
 
 public class Myprofile extends Fragment {
     Menu activity;
-    TextView userId , txt_date, txt_challenging;
+    TextView userId , txt_date, txt_challenging, txt_challengok;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
     ArrayList<Profile> profile;
@@ -43,6 +48,7 @@ public class Myprofile extends Fragment {
     private ListView listView;
     Button logout;
     static int progres_cnt;
+    static  int Okcnt=0;
 
     private static CustomAdapter_myprofile customAdapter;
 
@@ -170,8 +176,37 @@ public class Myprofile extends Fragment {
 
         // 현재순위, 도전진행, 도전성공을 프로필에 띄워주기
         txt_challenging = rootView.findViewById(R.id.txt_challenging);
-        txt_challenging.setText(pcnt.getCnt()+"개");
+        txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
+        txt_challengok = rootView.findViewById(R.id.txt_challengok);
+        txt_challengok.setText("도전성공\n"+Okcnt+"개");
+        //도전확인하기
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_check, null);
+                String data = (String) parent.getItemAtPosition(position);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("챌린지 확인");
+                dlg.setView(diglogView);
+                dlg.setPositiveButton("실천",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Okcnt++;
 
+
+
+                                //값 삭제 못함
+                                //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
+                                Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dlg.setNegativeButton("취소", null);
+
+                dlg.show();
+
+            }
+        });
         return rootView;
 
     }
