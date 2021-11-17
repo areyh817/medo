@@ -32,6 +32,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -48,7 +50,10 @@ public class Myprofile extends Fragment {
     private ListView listView;
     Button logout;
     static int progres_cnt;
-    static  int Okcnt=0;
+    int Okcnt=0;
+    String success_cnt;
+    int isuccess_cnt = 0;
+    RankingData rdata2;
 
     private static CustomAdapter_myprofile customAdapter;
 
@@ -179,6 +184,7 @@ public class Myprofile extends Fragment {
         txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
         txt_challengok = rootView.findViewById(R.id.txt_challengok);
         txt_challengok.setText("도전성공\n"+Okcnt+"개");
+
         //도전확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -192,16 +198,25 @@ public class Myprofile extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+
+
                                 Okcnt++;
 
-
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+                                CountData cdata = new CountData();
+                                // isuccess_cnt = Integer.parseInt(cdata.getOldcount());
+                                int new_cnt = Okcnt + isuccess_cnt;
+                                RankingData rdata = new RankingData(user_name[0], new_cnt, firebaseUser.getUid());
+                                mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
+                                mDatabaseRef.push().setValue(rdata2);
 
                                 //값 삭제 못함
                                 //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
                                 Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                dlg.setNegativeButton("취소", null);
+                        }); dlg.setNegativeButton("취소", null);
 
                 dlg.show();
 
