@@ -39,6 +39,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Myprofile extends Fragment {
     Menu activity;
@@ -51,7 +53,7 @@ public class Myprofile extends Fragment {
     Button logout;
     static int progres_cnt;
     int Okcnt=0;
-    String success_cnt;
+    Transaction.Result success_cnt;
     int isuccess_cnt = 0;
     RankingData rdata2;
 
@@ -201,22 +203,41 @@ public class Myprofile extends Fragment {
 
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
 
+                                DatabaseReference upvotesRef = mDatabaseRef.child(firebaseUser.getUid()).child("testdata").child("cnt");
+                                upvotesRef.runTransaction(new Transaction.Handler() {
+                                    @Override
+                                    public Transaction.Result doTransaction(MutableData mutableData) {
+                                        Integer currentValue = mutableData.getValue(Integer.class);
+                                        if (currentValue == null) {
+                                            mutableData.setValue(1);
+                                        } else {
+                                            mutableData.setValue(currentValue + 1);
+                                        }
 
-                                Okcnt++;
+                                        success_cnt = Transaction.success(mutableData);
+                                        return Transaction.success(mutableData);
+                                    }
+
+                                    @Override
+                                    public void onComplete(
+                                            DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
+                                        System.out.println("Transaction completed");
+                                    }
+                                });
+
 
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
-                                CountData cdata = new CountData();
-                                // isuccess_cnt = Integer.parseInt(cdata.getOldcount());
-                                int new_cnt = Okcnt + isuccess_cnt;
-                                RankingData rdata = new RankingData(user_name[0], new_cnt, firebaseUser.getUid());
+                                /*CountData cdata = new CountData();*/
+                                RankingData rdata = new RankingData(user_name[0], success_cnt, firebaseUser.getUid());
                                 mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
                                 mDatabaseRef.push().setValue(rdata2);
+
 
                                 //값 삭제 못함
                                 //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
                                 Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
                             }
-                        }); dlg.setNegativeButton("취소", null);
+                        }).setNegativeButton("취소", null);
 
                 dlg.show();
 

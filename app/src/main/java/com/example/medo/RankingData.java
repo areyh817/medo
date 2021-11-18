@@ -1,11 +1,13 @@
 package com.example.medo;
 
+import com.google.firebase.database.Transaction;
+
 public class RankingData {
     String name;
-    int cnt;
+    Transaction.Result cnt;
     String idToken;
 
-    public RankingData(String name, int cnt, String idToken) {
+    public RankingData(String name, Transaction.Result cnt, String idToken) {
         this.name = name;
         this.cnt = cnt;
         this.idToken = idToken;
@@ -27,11 +29,11 @@ public class RankingData {
         this.name = name;
     }
 
-    public int getCnt() {
+    public Transaction.Result getCnt() {
         return cnt;
     }
 
-    public void setCnt(int cnt) {
+    public void setCnt(Transaction.Result cnt) {
         this.cnt = cnt;
     }
 }
