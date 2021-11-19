@@ -50,8 +50,11 @@ public class CustomAdapter_ranking extends ArrayAdapter implements AdapterView.O
         viewHolder.txt_name = (TextView) convertView.findViewById(R.id.txt_name);
         viewHolder.txt_count = (TextView) convertView.findViewById(R.id.txt_count);
 
-
         final Rank ranks = (Rank) list.get(position);
+        viewHolder.txt_rank.setText(ranks.getRank());
+        viewHolder.txt_name.setText(ranks.getName());
+        viewHolder.txt_count.setText(ranks.getCnt());
+
 
         return convertView;
     }

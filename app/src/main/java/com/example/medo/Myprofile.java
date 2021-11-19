@@ -130,7 +130,7 @@ public class Myprofile extends Fragment {
         profile.add(new Profile("깃허브 커밋하기"));*/
 
 
-        
+
         // 지금 현재 로그인 되어있는 사람의 이름 값을 UserData에서 가져와야함
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -165,14 +165,14 @@ public class Myprofile extends Fragment {
                 String challengeadd_name = dataSnapshot.child("title").getValue(String.class);
                 for (DataSnapshot messageData : dataSnapshot.getChildren()){
                     // if문 조건 다시 줘야함
-                        ChallengeData challengedata = messageData.getValue(ChallengeData.class);
-                        listViewAdapter.add(challengedata.getTitle());
+                    ChallengeData challengedata = messageData.getValue(ChallengeData.class);
+                    listViewAdapter.add(challengedata.getTitle());
 
-                        // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
-                        listViewAdapter.notifyDataSetChanged();
-                        // ListView 의 위치를 마지막으로 보내주기 위함
-                        listView.setSelection(listViewAdapter.getCount() - 1);
-                        progres_cnt = listViewAdapter.getCount();
+                    // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
+                    listViewAdapter.notifyDataSetChanged();
+                    // ListView 의 위치를 마지막으로 보내주기 위함
+                    listView.setSelection(listViewAdapter.getCount() - 1);
+                    progres_cnt = listViewAdapter.getCount();
                 }
 
 
