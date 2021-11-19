@@ -1,8 +1,12 @@
 package com.example.medo;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.Transliterator;
 import android.os.Bundle;
 
@@ -20,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Myprofile extends Fragment {
+    private static final Object MODE_PRIVATE = "medo";
     Menu activity;
     TextView userId , txt_date, txt_challenging, txt_challengok;
     private FirebaseAuth mAuth;
@@ -53,13 +61,17 @@ public class Myprofile extends Fragment {
     Button logout;
     static int progres_cnt;
     int Okcnt=0;
-    Transaction.Result success_cnt;
+    int success_cnt;
     int isuccess_cnt = 0;
+    String ssuccess_cnt;
     RankingData rdata2;
+    final String[] user_name = new String[1];
+    private SharedPreferences preferences;
+
 
     private static CustomAdapter_myprofile customAdapter;
-
-
+    private DatabaseReference refdatabase;
+    DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("Ranking");
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +79,7 @@ public class Myprofile extends Fragment {
         // View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
         View rootView = inflater.inflate(R.layout.fragment_myprofile, container, false);
         listView = rootView.findViewById(R.id.listView_profile);
+        preferences = this.getActivity().getSharedPreferences("medoCount", Context.MODE_PRIVATE);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
         listView.setAdapter(listViewAdapter);
@@ -120,7 +133,7 @@ public class Myprofile extends Fragment {
         
         // 지금 현재 로그인 되어있는 사람의 이름 값을 UserData에서 가져와야함
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
-        final String[] user_name = new String[1];
+
         UserData userdata = new UserData();
 
         mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -185,7 +198,7 @@ public class Myprofile extends Fragment {
         txt_challenging = rootView.findViewById(R.id.txt_challenging);
         txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
         txt_challengok = rootView.findViewById(R.id.txt_challengok);
-        txt_challengok.setText("도전성공\n"+Okcnt+"개");
+
 
         //도전확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -201,43 +214,28 @@ public class Myprofile extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+                                success_cnt++;
 
-                                DatabaseReference upvotesRef = mDatabaseRef.child(firebaseUser.getUid()).child("testdata").child("cnt");
-                                upvotesRef.runTransaction(new Transaction.Handler() {
-                                    @Override
-                                    public Transaction.Result doTransaction(MutableData mutableData) {
-                                        Integer currentValue = mutableData.getValue(Integer.class);
-                                        if (currentValue == null) {
-                                            mutableData.setValue(1);
-                                        } else {
-                                            mutableData.setValue(currentValue + 1);
-                                        }
-
-                                        success_cnt = Transaction.success(mutableData);
-                                        return Transaction.success(mutableData);
-                                    }
-
-                                    @Override
-                                    public void onComplete(
-                                            DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
-                                        System.out.println("Transaction completed");
-                                    }
-                                });
-
+                                SharedPreferences.Editor editor = preferences.edit();
+                                //putString(KEY,VALUE)
+                                editor.putInt(user_name[0], success_cnt);
+                                editor.commit();
+                                //메소드 호출
+                                getPreferences();
 
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
                                 /*CountData cdata = new CountData();*/
-                                RankingData rdata = new RankingData(user_name[0], success_cnt, firebaseUser.getUid());
+                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
                                 mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
                                 mDatabaseRef.push().setValue(rdata2);
-
+                                txt_challengok.setText("도전성공\n"+isuccess_cnt+"개");
 
                                 //값 삭제 못함
                                 //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
                                 Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
                             }
-                        }).setNegativeButton("취소", null);
+
+                        }); dlg.setNegativeButton("취소", null);
 
                 dlg.show();
 
@@ -246,6 +244,12 @@ public class Myprofile extends Fragment {
         return rootView;
 
     }
+
+    private void getPreferences(){
+        //getString(KEY,KEY값이 없을때 대체)
+        isuccess_cnt = preferences.getInt(user_name[0], success_cnt);
+    }
+
 }
 
 

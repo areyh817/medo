@@ -4,10 +4,10 @@ import com.google.firebase.database.Transaction;
 
 public class RankingData {
     String name;
-    Transaction.Result cnt;
+    int cnt;
     String idToken;
 
-    public RankingData(String name, Transaction.Result cnt, String idToken) {
+    public RankingData(String name, int cnt, String idToken) {
         this.name = name;
         this.cnt = cnt;
         this.idToken = idToken;
@@ -29,11 +29,11 @@ public class RankingData {
         this.name = name;
     }
 
-    public Transaction.Result getCnt() {
+    public int getCnt() {
         return cnt;
     }
 
-    public void setCnt(Transaction.Result cnt) {
+    public void setCnt(int cnt) {
         this.cnt = cnt;
     }
 }
