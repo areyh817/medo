@@ -218,17 +218,15 @@ public class Myprofile extends Fragment {
 
                                 SharedPreferences.Editor editor = preferences.edit();
                                 //putString(KEY,VALUE)
-                                editor.putInt(user_name[0], success_cnt);
+                                editor.putInt("cnt", success_cnt+isuccess_cnt);
                                 editor.commit();
                                 //메소드 호출
                                 getPreferences();
-                                editor.putInt(user_name[0], isuccess_cnt+success_cnt);
-                                editor.commit();
-                                Log.d("myapp", String.valueOf(isuccess_cnt));
+                                Log.d("myapp", String.valueOf(success_cnt));
 
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
                                 /*CountData cdata = new CountData();*/
-                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt+success_cnt, firebaseUser.getUid());
+                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
                                 mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
                                 mDatabaseRef.push().setValue(rdata2);
 
@@ -251,7 +249,7 @@ public class Myprofile extends Fragment {
 
     private void getPreferences(){
         //getString(KEY,KEY값이 없을때 대체)
-        isuccess_cnt = preferences.getInt(user_name[0], success_cnt);
+        isuccess_cnt = preferences.getInt("cnt", success_cnt);
         Log.d("insuccess_cnt", String.valueOf(isuccess_cnt));
     }
 
