@@ -198,7 +198,7 @@ public class Myprofile extends Fragment {
         txt_challenging = rootView.findViewById(R.id.txt_challenging);
         txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
         txt_challengok = rootView.findViewById(R.id.txt_challengok);
-
+        txt_challengok.setText("도전성공\n"+isuccess_cnt+"개");
 
         //도전확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -222,13 +222,16 @@ public class Myprofile extends Fragment {
                                 editor.commit();
                                 //메소드 호출
                                 getPreferences();
+                                editor.putInt(user_name[0], isuccess_cnt+success_cnt);
+                                editor.commit();
+                                Log.d("myapp", String.valueOf(isuccess_cnt));
 
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
                                 /*CountData cdata = new CountData();*/
-                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
+                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt+success_cnt, firebaseUser.getUid());
                                 mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
                                 mDatabaseRef.push().setValue(rdata2);
-                                txt_challengok.setText("도전성공\n"+isuccess_cnt+"개");
+
 
                                 //값 삭제 못함
                                 //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
@@ -239,6 +242,7 @@ public class Myprofile extends Fragment {
 
                 dlg.show();
 
+
             }
         });
         return rootView;
@@ -248,6 +252,7 @@ public class Myprofile extends Fragment {
     private void getPreferences(){
         //getString(KEY,KEY값이 없을때 대체)
         isuccess_cnt = preferences.getInt(user_name[0], success_cnt);
+        Log.d("insuccess_cnt", String.valueOf(isuccess_cnt));
     }
 
 }

@@ -69,7 +69,7 @@ public class Ranking extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             get_name = dataSnapshot.child("testdata").child("name").getValue(String.class);
                 int get_cnt = dataSnapshot.child("testdata").child("cnt").getValue(int.class);
-                Toast.makeText(getContext(), get_name, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), get_name, Toast.LENGTH_SHORT).show();
 
 
 
