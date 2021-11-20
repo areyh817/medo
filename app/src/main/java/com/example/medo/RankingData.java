@@ -4,13 +4,22 @@ import com.google.firebase.database.Transaction;
 
 public class RankingData {
     String name;
-    int cnt;
     String idToken;
+    String data;
 
-    public RankingData(String name, int cnt, String idToken) {
+    public RankingData(String name, String idToken, String data) {
         this.name = name;
-        this.cnt = cnt;
         this.idToken = idToken;
+        this.data = data;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIdToken() {
@@ -21,19 +30,11 @@ public class RankingData {
         this.idToken = idToken;
     }
 
-    public String getName() {
-        return name;
+    public String getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
+    public void setData(String data) {
+        this.data = data;
     }
 }

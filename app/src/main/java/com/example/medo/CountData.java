@@ -4,24 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CountData {
-    int oldcount;
-    public int starCount = 0;
-    public Map<String, Boolean> stars = new HashMap<>();
+    int cnt;
 
-    public CountData() {
+    public CountData(){}
+
+    public CountData(int cnt) {
+        this.cnt = cnt;
     }
 
-    public CountData(int oldcount) {
-        this.oldcount = oldcount;
+    public int getCnt() {
+        return cnt;
     }
 
-
-    public int getOldcount() {
-        return oldcount;
+    public void setCnt(int cnt) {
+        this.cnt = cnt;
     }
-
-    public void setOldcount(int oldcount) {
-        this.oldcount = oldcount;
-    }
-
 }

@@ -65,6 +65,7 @@ public class Myprofile extends Fragment {
     int isuccess_cnt = 0;
     String ssuccess_cnt;
     RankingData rdata2;
+    BasicData bdata2;
     final String[] user_name = new String[1];
     private SharedPreferences preferences;
 
@@ -78,11 +79,13 @@ public class Myprofile extends Fragment {
 
         // View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
         View rootView = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        View cntView = inflater.inflate(R.layout.listview_cnt, container, false);
         listView = rootView.findViewById(R.id.listView_profile);
         preferences = this.getActivity().getSharedPreferences("medoCount", Context.MODE_PRIVATE);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arr_room);
         listView.setAdapter(listViewAdapter);
+
 
         //로그아웃기능
         logout = rootView.findViewById(R.id.logout);
@@ -198,7 +201,7 @@ public class Myprofile extends Fragment {
         txt_challenging = rootView.findViewById(R.id.txt_challenging);
         txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
         txt_challengok = rootView.findViewById(R.id.txt_challengok);
-        txt_challengok.setText("도전성공\n"+isuccess_cnt+"개");
+
 
         //도전확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -214,26 +217,61 @@ public class Myprofile extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                success_cnt++;
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
 
-                                SharedPreferences.Editor editor = preferences.edit();
+                                RankingData radata = new RankingData(user_name[0], firebaseUser.getUid(), data);
+                                mDatabaseRef.child(firebaseUser.getUid()).push().setValue(radata);
+
+                                /*SharedPreferences.Editor editor = preferences.edit();
                                 //putString(KEY,VALUE)
                                 editor.putInt("cnt", success_cnt+isuccess_cnt);
                                 editor.commit();
                                 //메소드 호출
                                 getPreferences();
-                                Log.d("myapp", String.valueOf(success_cnt));
+                                Log.d("myapp", String.valueOf(success_cnt));*/
 
-                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+                                /*mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
                                 /*CountData cdata = new CountData();*/
-                                RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
+                                /*RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
                                 mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
-                                mDatabaseRef.push().setValue(rdata2);
+                                mDatabaseRef.push().setValue(rdata2);*/
 
 
                                 //값 삭제 못함
                                 //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
+
+                                // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
+                                mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        String rakingdata_name = dataSnapshot.child("data").getValue(String.class);
+                                        isuccess_cnt = 0;
+                                        for (DataSnapshot messageData : dataSnapshot.getChildren()){
+                                            isuccess_cnt++;
+                                            Log.d("mydata", String.valueOf(isuccess_cnt));
+                                        }
+
+                                        CountData cdata = new CountData();
+                                        cdata.setCnt(isuccess_cnt);
+                                        txt_challengok.setText("도전성공\n"+cdata.getCnt()+"개");
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
                                 Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
+                                CountData cdata = new CountData();
+                                cdata.setCnt(isuccess_cnt);
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+                                BasicData bdata = new BasicData(cdata.getCnt(), firebaseUser.getUid(), user_name[0]);
+                                mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(bdata);
+                                mDatabaseRef.push().setValue(bdata2);
+
+
                             }
 
                         }); dlg.setNegativeButton("취소", null);
