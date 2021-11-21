@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.icu.text.Transliterator;
 import android.os.Bundle;
 
@@ -45,6 +46,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +78,15 @@ public class Myprofile extends Fragment {
     DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("Ranking");
 
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+
+
+
+
+
 
         // View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
         View rootView = inflater.inflate(R.layout.fragment_myprofile, container, false);
@@ -177,6 +187,8 @@ public class Myprofile extends Fragment {
                     listView.setSelection(listViewAdapter.getCount() - 1);
                     progres_cnt = listViewAdapter.getCount();
                     ProgresCount pcnt = new ProgresCount(progres_cnt);
+
+
                     txt_challenging.setText("도전진행\n"+(pcnt.getCnt())+"개");
 
                 }
@@ -222,23 +234,19 @@ public class Myprofile extends Fragment {
 
 
 
-
         //도전확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View diglogView = View.inflate(getActivity(), R.layout.dlg_challenge_check, null);
                 String data = (String) parent.getItemAtPosition(position);
+
+
+
+
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 확인");
                 dlg.setView(diglogView);
-
-
-
-
-
-
-
 
 
                 dlg.setPositiveButton("실천",
@@ -247,10 +255,11 @@ public class Myprofile extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 
+                                //실천시 데이터 삭제
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
+                                mDatabaseRef.child(firebaseUser.getUid()).child(data).setValue(null);
 
-                
-
-
+                               // view.setBackgroundColor(Color.GREEN);
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
                                 RankingData radata = new RankingData(user_name[0], firebaseUser.getUid(), data);
                                 mDatabaseRef.child(firebaseUser.getUid()).push().setValue(radata);
@@ -261,9 +270,11 @@ public class Myprofile extends Fragment {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         String rakingdata_name = dataSnapshot.child("data").getValue(String.class);
+
                                         isuccess_cnt = 0;
                                         for (DataSnapshot messageData : dataSnapshot.getChildren()){
                                             isuccess_cnt++;
+
                                             Log.d("mydata", String.valueOf(isuccess_cnt));
                                         }
 

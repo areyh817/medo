@@ -192,7 +192,7 @@ public class Challenge extends Fragment {
                                         String value = dataSnapshot.getValue(String.class);
                                             ChallengeAdd challengeAdd = new ChallengeAdd(user_name[0], firebaseUser.getUid(), data);
                                             mDatabaseRef.child(firebaseUser.getUid()).child(data).setValue(challengeAdd);
-                                            Toast.makeText(getContext(), "챌린지 신청 완료! (전에 신청했던 방은 다시 재입장 처리됩니다.)", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), "챌린지 신청 완료! \n (전에 신청했던 방은 다시 재입장 처리됩니다.)", Toast.LENGTH_LONG).show();
 
 
 
