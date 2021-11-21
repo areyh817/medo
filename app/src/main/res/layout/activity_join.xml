@@ -83,6 +83,7 @@
             android:layout_marginTop="280dp"
             android:layout_marginLeft="45dp"/>
         <EditText
+            android:hint="한글 이름"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
@@ -104,6 +105,7 @@
             android:layout_marginLeft="45dp"/>
 
         <EditText
+            android:hint="비밀번호 6자리 이상"
             android:id="@+id/edtPW"
             android:layout_width="320dp"
             android:layout_height="54dp"
@@ -115,6 +117,7 @@
             android:inputType="textPassword"
             android:textSize="12.5dp" />
         <Button
+
             android:layout_width="320dp"
             android:layout_height="55dp"
             android:background="@drawable/login_round_green"

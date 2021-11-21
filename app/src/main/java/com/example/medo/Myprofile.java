@@ -68,7 +68,8 @@ public class Myprofile extends Fragment {
     BasicData bdata2;
     final String[] user_name = new String[1];
     private SharedPreferences preferences;
-
+    int ccc;
+    CountData cdata;
 
     private static CustomAdapter_myprofile customAdapter;
     private DatabaseReference refdatabase;
@@ -123,14 +124,7 @@ public class Myprofile extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        //사용자
 
-
-        //리스트뷰 값이 안들어간다 여기에 유저가 선택한 도전들 띄우게 해주쇼
-        /*profile = new ArrayList<>();
-        profile.add(new Profile("깃허브 커밋하기"));
-        profile.add(new Profile("깃허브 커밋하기"));
-        profile.add(new Profile("깃허브 커밋하기"));*/
 
 
 
@@ -159,6 +153,12 @@ public class Myprofile extends Fragment {
         });
 
 
+        // 현재순위, 도전진행, 도전성공을 프로필에 띄워주기
+        txt_challenging = rootView.findViewById(R.id.txt_challenging);
+
+        txt_challengok = rootView.findViewById(R.id.txt_challengok);
+
+
         // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
         mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -176,10 +176,13 @@ public class Myprofile extends Fragment {
                     // ListView 의 위치를 마지막으로 보내주기 위함
                     listView.setSelection(listViewAdapter.getCount() - 1);
                     progres_cnt = listViewAdapter.getCount();
+                    ProgresCount pcnt = new ProgresCount(progres_cnt);
+                    txt_challenging.setText("도전진행\n"+(pcnt.getCnt())+"개");
+
                 }
 
 
-                ProgresCount pcnt = new ProgresCount(progres_cnt);
+
 
             }
 
@@ -191,16 +194,33 @@ public class Myprofile extends Fragment {
 
 
 
-       /* listView_profile = (ListView) view.findViewById(R.id.listView_profile);
-        customAdapter = new CustomAdapter_myprofile(getContext(),profile);
-        listView_profile.setAdapter(customAdapter);*/
 
-        ProgresCount pcnt = new ProgresCount(progres_cnt);
 
-        // 현재순위, 도전진행, 도전성공을 프로필에 띄워주기
-        txt_challenging = rootView.findViewById(R.id.txt_challenging);
-        txt_challenging.setText("도전진행\n"+pcnt.getCnt()+"개");
-        txt_challengok = rootView.findViewById(R.id.txt_challengok);
+
+
+        //초기 랭킹리스트 카운트 불러오기
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
+        mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String rakingdata_name = dataSnapshot.child("data").getValue(String.class);
+                isuccess_cnt = 0;
+                for (DataSnapshot messageData : dataSnapshot.getChildren()){
+                    isuccess_cnt++;
+                    Log.d("mydata", String.valueOf(isuccess_cnt));
+                }
+                cdata = new CountData();
+                cdata.setCnt(isuccess_cnt);
+                txt_challengok.setText("도전성공\n"+cdata.getCnt()+"개");
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        });
+
+
+
 
 
         //도전확인하기
@@ -212,6 +232,7 @@ public class Myprofile extends Fragment {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 확인");
                 dlg.setView(diglogView);
+
                 dlg.setPositiveButton("실천",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -221,20 +242,6 @@ public class Myprofile extends Fragment {
 
                                 RankingData radata = new RankingData(user_name[0], firebaseUser.getUid(), data);
                                 mDatabaseRef.child(firebaseUser.getUid()).push().setValue(radata);
-
-                                /*SharedPreferences.Editor editor = preferences.edit();
-                                //putString(KEY,VALUE)
-                                editor.putInt("cnt", success_cnt+isuccess_cnt);
-                                editor.commit();
-                                //메소드 호출
-                                getPreferences();
-                                Log.d("myapp", String.valueOf(success_cnt));*/
-
-                                /*mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
-                                /*CountData cdata = new CountData();*/
-                                /*RankingData rdata = new RankingData(user_name[0], isuccess_cnt, firebaseUser.getUid());
-                                mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(rdata);
-                                mDatabaseRef.push().setValue(rdata2);*/
 
 
                                 //값 삭제 못함
@@ -252,15 +259,18 @@ public class Myprofile extends Fragment {
                                             Log.d("mydata", String.valueOf(isuccess_cnt));
                                         }
 
-                                        CountData cdata = new CountData();
+                                         cdata = new CountData();
                                         cdata.setCnt(isuccess_cnt);
+                                        ccc=cdata.getCnt();
                                         txt_challengok.setText("도전성공\n"+cdata.getCnt()+"개");
+
                                     }
 
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
 
                                     }
+
                                 });
 
                                 Toast.makeText(getContext(), "실천 완료!", Toast.LENGTH_SHORT).show();
@@ -281,6 +291,8 @@ public class Myprofile extends Fragment {
 
             }
         });
+
+
         return rootView;
 
     }

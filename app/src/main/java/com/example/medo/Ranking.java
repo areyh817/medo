@@ -3,6 +3,7 @@ package com.example.medo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,7 +71,13 @@ public class Ranking extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             get_name = dataSnapshot.child("testdata").child("name").getValue(String.class);
-                int get_cnt = dataSnapshot.child("testdata").child("cnt").getValue(int.class);
+                int get_cnt;
+
+               if(dataSnapshot.child("testdata").child("cnt").getValue(int.class)!=null){
+                   get_cnt=dataSnapshot.child("testdata").child("cnt").getValue(int.class);
+               }
+
+
                 // Toast.makeText(getContext(), get_name, Toast.LENGTH_SHORT).show();
 
 

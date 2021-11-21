@@ -96,21 +96,21 @@
         android:layout_marginLeft="30dp"
         android:gravity="center"
         android:textSize="16dp"
-        android:text="현재순위\n2위"/>
+        android:text="현재순위\n0위"/>
     <TextView
         android:fontFamily="@font/nanumr"
         android:id="@+id/txt_challenging"
         android:layout_gravity = "center_horizontal"
         android:gravity="center"
         android:textSize="16dp"
-        android:text="도전진행\n3개"/>
+        android:text="도전진행\n0개"/>
     <TextView
         android:fontFamily="@font/nanumr"
         android:id="@+id/txt_challengok"
         android:layout_marginRight="30dp"
         android:gravity="center"
         android:textSize="16dp"
-        android:text="도전성공\n1개"/>
+        android:text="도전성공\n0개"/>
 
 
 </GridLayout>
