@@ -81,12 +81,12 @@ public class Myprofile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-
-        Long time = new Date().getTime();
+        //자정 초기화 추가하기
+  /*      Long time = new Date().getTime();
         Date today = new Date();
         Date tomorrow = new Date(time - time % (24 * 60 * 60 * 1000));
         String tt=today.toString();
-        String dd=tomorrow.toString();
+        String dd=tomorrow.toString();*/
 
         //시간 확인용
 /*        Toast.makeText(getContext(), tt, Toast.LENGTH_SHORT).show();
@@ -260,9 +260,9 @@ public class Myprofile extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                if(tt==dd){
+                             /*   if(tt==dd){
                                     mDatabaseRef.child(firebaseUser.getUid()).setValue(null);
-                                }
+                                }*/
                                 //실천시 데이터 삭제
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
                                 mDatabaseRef.child(firebaseUser.getUid()).child(data).setValue(null);
@@ -277,9 +277,9 @@ public class Myprofile extends Fragment {
 
 
                                 //자정 초기화
-                                if(tt==dd){
+                               /* if(tt==dd){
                                     mDatabaseRef.child(firebaseUser.getUid()).setValue(null);
-                                }
+                                }*/
                                 mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
