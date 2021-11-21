@@ -101,6 +101,10 @@ public class Ranking extends Fragment {
 
 
         ranks.add(new Rank("1위","테스트","3개"));
+        ranks.add(new Rank("2위","테스트","3개"));
+        ranks.add(new Rank("3위","테스트","3개"));
+        ranks.add(new Rank("4위","테스트","3개"));
+
 
 
 

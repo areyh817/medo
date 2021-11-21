@@ -233,19 +233,27 @@ public class Myprofile extends Fragment {
                 dlg.setTitle("챌린지 확인");
                 dlg.setView(diglogView);
 
+
+
+
+
+
+
+
+
                 dlg.setPositiveButton("실천",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
 
+
+                
+
+
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
                                 RankingData radata = new RankingData(user_name[0], firebaseUser.getUid(), data);
                                 mDatabaseRef.child(firebaseUser.getUid()).push().setValue(radata);
-
-
-                                //값 삭제 못함
-                                //mDatabaseRef.child(firebaseUser.getUid()).removeValue();
 
                                 // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
