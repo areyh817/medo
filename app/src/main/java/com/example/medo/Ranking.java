@@ -42,7 +42,8 @@ public class Ranking extends Fragment {
     private DatabaseReference mDatabaseRef;
     private static CustomAdapter_ranking customAdapter;
 
-
+    int isuccess_cnt;
+    CountData cdata;
     String get_name;
     private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/M/d HH:mm");
     @Override
@@ -59,7 +60,7 @@ public class Ranking extends Fragment {
         //기본 데이터
         ranks = new ArrayList<>();
 
-
+        Toast.makeText(getContext(),"Coming soon", Toast.LENGTH_SHORT).show();
 
         //사용자 불러오기
         mAuth = FirebaseAuth.getInstance();
@@ -73,22 +74,9 @@ public class Ranking extends Fragment {
             get_name = dataSnapshot.child("testdata").child("name").getValue(String.class);
                 int get_cnt;
 
-               if(dataSnapshot.child("testdata").child("cnt").getValue(int.class)!=null){
-                   get_cnt=dataSnapshot.child("testdata").child("cnt").getValue(int.class);
+               if(dataSnapshot.child("rank").child("cnt").getValue(int.class)!=null){
+                   get_cnt=dataSnapshot.child("rank").child("cnt").getValue(int.class);
                }
-
-
-                // Toast.makeText(getContext(), get_name, Toast.LENGTH_SHORT).show();
-
-
-
-/*
-
-                for(int i=0; i<4; i++){
-
-                   // ranks.add(new Rank("1위",get_name,"3개"));
-                }
-*/
 
 
             }
@@ -96,14 +84,6 @@ public class Ranking extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
-
-        ranks.add(new Rank("1위","테스트","3개"));
-        ranks.add(new Rank("2위","테스트","3개"));
-        ranks.add(new Rank("3위","테스트","3개"));
-        ranks.add(new Rank("4위","테스트","3개"));
 
 
 
@@ -121,19 +101,19 @@ public class Ranking extends Fragment {
 
 //data class
 class Rank {
-    private String rank, name;
-    private String cnt;
-    public Rank( String rank, String name,String cnt) {
+    private String  name;
+    private int cnt,rank;
+    public Rank( int rank, String name,int cnt) {
         this.rank = rank;
         this.name = name;
         this.cnt = cnt;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public String getCnt() {
+    public int getCnt() {
         return cnt;
     }
     public String getName() {

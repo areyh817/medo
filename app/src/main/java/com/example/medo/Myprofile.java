@@ -41,8 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -83,8 +82,15 @@ public class Myprofile extends Fragment {
 
 
 
+        Long time = new Date().getTime();
+        Date today = new Date();
+        Date tomorrow = new Date(time - time % (24 * 60 * 60 * 1000));
+        String tt=today.toString();
+        String dd=tomorrow.toString();
 
-
+        //시간 확인용
+/*        Toast.makeText(getContext(), tt, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), dd, Toast.LENGTH_SHORT).show();*/
 
 
 
@@ -221,7 +227,7 @@ public class Myprofile extends Fragment {
                     isuccess_cnt++;
                     Log.d("mydata", String.valueOf(isuccess_cnt));
                 }
-                cdata = new CountData();
+                CountData cdata = new CountData();
                 cdata.setCnt(isuccess_cnt);
                 txt_challengok.setText("도전성공\n"+cdata.getCnt()+"개");
             }
@@ -254,7 +260,9 @@ public class Myprofile extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-
+                                if(tt==dd){
+                                    mDatabaseRef.child(firebaseUser.getUid()).setValue(null);
+                                }
                                 //실천시 데이터 삭제
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
                                 mDatabaseRef.child(firebaseUser.getUid()).child(data).setValue(null);
@@ -266,6 +274,12 @@ public class Myprofile extends Fragment {
 
                                 // ChallengeAdd에서 UserData에서 볼러온 name값을 대조해야함
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("RankingList");
+
+
+                                //자정 초기화
+                                if(tt==dd){
+                                    mDatabaseRef.child(firebaseUser.getUid()).setValue(null);
+                                }
                                 mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -296,9 +310,12 @@ public class Myprofile extends Fragment {
                                 CountData cdata = new CountData();
                                 cdata.setCnt(isuccess_cnt);
                                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("Ranking");
+
                                 BasicData bdata = new BasicData(cdata.getCnt(), firebaseUser.getUid(), user_name[0]);
-                                mDatabaseRef.child(firebaseUser.getUid()).child("testdata").setValue(bdata);
-                                mDatabaseRef.push().setValue(bdata2);
+                                //mDatabaseRef.child(firebaseUser.getUid()).child("rank").setValue(bdata);
+                                mDatabaseRef.push().setValue(bdata);
+
+
 
 
                             }

@@ -13,6 +13,11 @@ public class BasicData {
         this.name = name;
     }
 
+    public BasicData(int cnt, String name) {
+        this.cnt = cnt;
+        this.name = name;
+    }
+
     public int getCnt() {
         return cnt;
     }
