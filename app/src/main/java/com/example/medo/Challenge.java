@@ -43,6 +43,7 @@ public class Challenge extends Fragment {
     private DatabaseReference mDatabaseRef;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> arr_room = new ArrayList<>();
+    ChallengeAdd cdata2;
 
 
     @Override
@@ -150,6 +151,28 @@ public class Challenge extends Fragment {
                     }
                 });
 
+                final String[] user_name = new String[1];
+                // 이름을 따로 불러옴
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+
+                mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String get_name = dataSnapshot.child("name").getValue(String.class);
+                        if(get_name==""||get_name==null){
+                            get_name = "미도[테스트]";
+                        }
+                        user_name[0] = get_name;
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("챌린지 도전");
                 dlg.setView(diglogView);
@@ -158,31 +181,29 @@ public class Challenge extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
+                                mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
 
-                                mDatabaseRef.child("UserData").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    String user_name;
+                                mDatabaseRef.child(firebaseUser.getUid()).child(data).child("title").addListenerForSingleValueEvent(new ValueEventListener() {
+
 
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        String get_name = dataSnapshot.child("name").getValue(String.class);
-                                        if(get_name==""||get_name==null){
-                                            get_name = "미도[테스트]";
-                                        }
-                                        user_name = get_name;
+                                        String value = dataSnapshot.getValue(String.class);
+                                            ChallengeAdd challengeAdd = new ChallengeAdd(user_name[0], firebaseUser.getUid(), data);
+                                            mDatabaseRef.child(firebaseUser.getUid()).child(data).setValue(challengeAdd);
+                                            Toast.makeText(getContext(), "챌린지 신청 완료! (전에 신청했던 방은 다시 재입장 처리됩니다.)", Toast.LENGTH_LONG).show();
 
-                                        mDatabaseRef = FirebaseDatabase.getInstance().getReference("ChallengeAdd");
 
-                                        ChallengeAdd challengeAdd = new ChallengeAdd(user_name, firebaseUser.getUid(), data);
-                                        mDatabaseRef.child(firebaseUser.getUid()).push().setValue(challengeAdd);
+
+                                        // mDatabaseRef.push().setValue(bdata2);
                                     }
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
                                     }
                                 });
 
-                                Toast.makeText(getContext(), "챌린지 신청 완료!", Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(getContext(), "챌린지 신청 완료!", Toast.LENGTH_SHORT).show();
                             }
                         });
                 dlg.setNegativeButton("취소", null);
