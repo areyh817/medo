@@ -1,7 +1,8 @@
 # medo
 美:도 미림인들을 위한 챌린지 도전 앱 :fire:
 
-:notebook_with_decorative_cover: notion : https://geode-gem-7b6.notion.site/4ea448c706064b4793e8d342beeb2690
+:notebook_with_decorative_cover: notion : https://geode-gem-7b6.notion.site/4ea448c706064b4793e8d342beeb2690<Br>
+:one: one store : https://m.onestore.co.kr/mobilepoc/apps/appsDetail.omp?prodId=0000759352
 <br><br>
 ### 기획 의도
 코로나로 인해 사람들과의 만남이 줄어들어 집에 있는 시간이 길어졌습니다. 또한 사람들과의 접촉이 줄어들다 보니 의욕이 점점 줄어들고 아무것도 하기 싫은 생각만 늘었습니다. 그리고 코로나로 인한 우울증에 대한 심각성이 확인됐습니다. 여성이 남성보다 고위험 우울감을 겪고 있음이 확인됐습니다.
